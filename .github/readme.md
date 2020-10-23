@@ -21,7 +21,40 @@
 * [Contribuindo](#Contribuindo-)
 * [License](#License-)
 ## Começando 🚀
-...
+**Requisitos**
+
+Para rodar essa aplicação em sua máquina como desenvolvedor você precisa ter instalado:
+* [Node.js][node-url]
+* [Yarn][yarn-url] or [npm][npm-url]
+* [Expo][expo-url]
+
+**Download**
+
+Baixe o .zip deste repositório ou clone usando CLI do git
+
+#### Download do Repositório
+[![Download Repo][download-button]][download-url]
+
+#### Usando git CLI
+```shell
+$ git clone https://github.com/pmqueiroz/dsdm-trab.git xo-games
+```
+**Rodando em sua máquina**
+
+```shell
+$ cd {path to your clone}
+
+# Instalando as dependencias
+# Usando Yarn (nao seja boi de usar npm)
+$ yarn
+# Usando npm
+$ npm i
+
+# Rodando a aplicação
+$ expo start
+```
+se você tem dúvidas sobre como rodar o projeto usando expo consulte sua [documentação](https://docs.expo.io)
+
 ## Features 🎮
 ### TicTacToe
 ### Hangman Game
@@ -53,11 +86,17 @@ $ git push origin {branch-name}
 # Faça um pull request do seu repositório
 ```
 
+### License 📝
+This project is under the MIT license. See the [LICENSE][license-url] for more information.
+
 [status-badge]: https://img.shields.io/badge/status-building-important?logo=tool
 [proffy-apk-badge]: https://img.shields.io/badge/Apk-download-important?logo=android&color=%233575F8
 [license-badge]: https://img.shields.io/github/license/pmqueiroz/dsdm-trab?color=%233575F8
 [license-url]: https://github.com/pmqueiroz/dsdm-trab/blob/master/LICENSE
 [issues-url]: https://github.com/pmqueiroz/dsdm-trab/issues
-
-### License 📝
-This project is under the MIT license. See the [LICENSE][license-url] for more information.
+[download-button]: https://github-readme-perks.vercel.app/api/button?content=Baixar%20Repo&link=https://github.com/pmqueiroz/dsdm-trab/archive/master.zip&logo=github&bgColor=%233575F8
+[download-url]: https://github.com/pmqueiroz/dsdm-trab/archive/master.zip
+[node-url]: https://nodejs.org/en
+[yarn-url]: https://classic.yarnpkg.com/
+[npm-url]:  https://www.npmjs.com/
+[expo-url]: https://expo.io/
