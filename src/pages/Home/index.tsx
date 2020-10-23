@@ -21,10 +21,10 @@ export default function Home(){
       <Text style={styles.title}>Select the game you wanna play</Text>
       <View style={styles.buttonContainer}>
          <TouchableOpacity onPress={handleNavigateToTicTacToe} style={styles.button}>
-            <Text>Tic Tac Toe</Text>
+            <Text style={styles.buttonText}>Tic Tac Toe</Text>
          </TouchableOpacity>
          <TouchableOpacity onPress={() => {console.log('certo')} } style={styles.button}>
-            <Text>Hangman</Text>
+            <Text style={styles.buttonText}>Hangman</Text>
          </TouchableOpacity>
       </View>
       <StatusBar style="auto" />

@@ -27,19 +27,22 @@ const styles = StyleSheet.create({
       backgroundColor: '#3879F9',
       width: '150px',
       height: '50px',
-      color: '#FFF',
       paddingVertical: 5,
       paddingHorizontal: 10,
       borderRadius: 70,
       alignItems: 'center',
       justifyContent: 'center',
       marginTop: '10px',
-      fontFamily: 'Roboto_400Regular',
-      fontSize: 15,
       shadowOffset:{  width: 0,  height: 5,  },
       shadowColor: 'black',
       shadowOpacity: 0.3,
       shadowRadius: 5,
+   },
+
+   buttonText: {
+      color: '#FFF',
+      fontFamily: 'Roboto_400Regular',
+      fontSize: 15,
    },
  
    buttonContainer: {
