@@ -7,6 +7,7 @@ import {
    TextInput
 } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from '@react-navigation/native'
 
 import Modal from '../../Components/Modal';
 
@@ -16,6 +17,20 @@ import OImg from "../../images/O.png";
 import CogImg from "../../images/Cog.png";
 
 export default function TicTacToe() {
+   const navigation = useNavigation();
+
+   function handleGoToMenu () {
+      fullResetGame();
+      navigation.navigate('Home');
+   }
+
+   function fullResetGame() {
+      setModalVisible(false);
+      setBoard(initialBoardState);
+      setCurrentPlayer(1);
+      setScoreboard([0, 0]);
+   }
+
    const initialBoardState = [
       [0, 0, 0],
       [0, 0, 0],
@@ -24,9 +39,10 @@ export default function TicTacToe() {
 
    const [currentPlayer, setCurrentPlayer] = useState(1);
    const [board, setBoard] = useState(initialBoardState);
-   const [modalVisible, setModalVisible] = useState(true);
-
+   const [modalVisible, setModalVisible] = useState(false);
    const [scoreboard, setScoreboard] = useState([0, 0]);
+
+   const delay = (ms: any) => new Promise(res => setTimeout(res, ms));
 
    const playerXName = "Player X";
    const playerOName = "Player O";
@@ -57,8 +73,10 @@ export default function TicTacToe() {
       setCurrentPlayer(player);
 
       const resetGame = () => {
-         setBoard(initialBoardState);
-         setCurrentPlayer(1);
+         delay(500).then(() => {
+            setBoard(initialBoardState);
+            setCurrentPlayer(1);
+         })
       };
 
       const winner = calculateWinner();
@@ -264,13 +282,24 @@ export default function TicTacToe() {
                   <TextInput placeholder={playerOName} style={[styles.nameInput]} />
                </LinearGradient>
                <View style={styles.separator} />
-               <TouchableOpacity style={styles.button}>
+               <TouchableOpacity 
+                  style={styles.button}
+                  onPress={fullResetGame}
+               >
                   <Text style={styles.buttonText}>Reset Game</Text>
                </TouchableOpacity>
-               <TouchableOpacity style={styles.button}>
+               <TouchableOpacity 
+                  style={styles.button}
+                  onPress={handleGoToMenu}
+               >
                   <Text style={styles.buttonText}>Menu</Text>
                </TouchableOpacity>
-               <TouchableOpacity style={[styles.button, styles.buttonWhite]}>
+               <TouchableOpacity 
+                  style={[styles.button, styles.buttonWhite]}
+                  onPress={() => {
+                     setModalVisible(!modalVisible);
+                  }}
+               >
                   <Text style={[styles.buttonText, styles.buttonTextBlack]}>Continue</Text>
                </TouchableOpacity>
             </View>
