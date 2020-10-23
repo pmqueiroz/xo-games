@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
-import { RectButton } from 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { useNavigation } from '@react-navigation/native'
 
@@ -9,10 +8,10 @@ import logoImg from '../../images/Logo.png';
 
 
 export default function Home(){
+
    const navigation = useNavigation();
 
    function handleNavigateToTicTacToe() {
-      console.log('clicked')
       navigation.navigate('TicTacToe')      
    }
 
