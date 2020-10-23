@@ -18,13 +18,15 @@ const styles = StyleSheet.create({
    tile: {
       borderWidth: 1,
       borderColor: "#ADA6A6",
-      width: 100,
-      height: 100,
+      width: '25vw',
+      height: '25vw',
+      maxWidth: 100,
+      maxHeight: 100,
       alignItems: "center",
       justifyContent: "center",
    },
 
-   tables: {
+   tileIcon: {
       width: 60,
       height: 60,
    },
@@ -69,6 +71,14 @@ const styles = StyleSheet.create({
       fontSize: 20,
    },
 
+   
+   activeX: {
+      color: '#3879F9',
+   },
+   activeO: {
+      color: "#F77634",
+   },
+
    config: {
       backgroundColor: "#FFFFFF",
       width: 50,
@@ -91,6 +101,7 @@ const styles = StyleSheet.create({
    modalContainer: {
       backgroundColor: "#FFF",
       width: '90%',
+      maxWidth: 500,
       height: 'auto',
       alignItems: "center",
       justifyContent: "center",
@@ -106,7 +117,7 @@ const styles = StyleSheet.create({
    titleText: {
       fontFamily: 'Roboto_500Medium',
       fontSize: 24,
-      color: '#3E5A82' 
+      color: '#3E5A82'
    },
 
    separator: {
@@ -122,6 +133,7 @@ const styles = StyleSheet.create({
       height: '70%',
       borderRadius: 50,
       paddingLeft: 10,
+      outline: 'none'
    },
 
    linearGradient: {

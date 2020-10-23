@@ -41,20 +41,19 @@ export default function TicTacToe() {
    const [board, setBoard] = useState(initialBoardState);
    const [modalVisible, setModalVisible] = useState(false);
    const [scoreboard, setScoreboard] = useState([0, 0]);
+   const [playerXName, setPlayerXName] = useState("Player X");
+   const [playerOName, setPlayerOName] = useState("Player O");
 
    const delay = (ms: any) => new Promise(res => setTimeout(res, ms));
-
-   const playerXName = "Player X";
-   const playerOName = "Player O";
 
    function renderIcon(row: number, column: number) {
       const value = board[row][column];
 
       switch (value) {
          case 1:
-            return <Image source={XImg} style={styles.tables} />;
+            return <Image source={XImg} style={styles.tileIcon} />;
          case -1:
-            return <Image source={OImg} style={styles.tables} />;
+            return <Image source={OImg} style={styles.tileIcon} />;
          default:
             return <View />;
       }
@@ -146,13 +145,13 @@ export default function TicTacToe() {
    return (
       <View style={styles.container}>
          <View style={styles.scoreboard}>
-            <Text style={styles.scoreText}>{playerXName}</Text>
+            <Text style={[styles.scoreText, currentPlayer === 1 ? styles.activeX: null]}>{playerXName}</Text>
             <View style={styles.score}>
                <Text style={styles.scoreText}>
                   {scoreboard[0]} - {scoreboard[1]}
                </Text>
             </View>
-            <Text style={styles.scoreText}>{playerOName}</Text>
+            <Text style={[styles.scoreText, currentPlayer === -1 ? styles.activeO: null]}>{playerOName}</Text>
          </View>
 
          <View style={styles.canvas}>
@@ -270,16 +269,25 @@ export default function TicTacToe() {
                   colors={['#3575F8', '#80D9DA']}
                   style={styles.linearGradient}
                >
-                  <TextInput placeholder={playerXName} style={[styles.nameInput]} />
+                  <TextInput 
+                     placeholder={playerXName} 
+                     style={[styles.nameInput]}
+                     onChangeText={text => setPlayerXName(text)}
+                     maxLength = {10}
+                  />
                </LinearGradient>
                <LinearGradient 
                   start={[0, 0.5]} 
                   end={[1, 0.5]} 
                   colors={['#F77634', '#F1D06E']}
                   style={styles.linearGradient}
-               
                >
-                  <TextInput placeholder={playerOName} style={[styles.nameInput]} />
+                  <TextInput 
+                     placeholder={playerOName} 
+                     style={[styles.nameInput]}
+                     onChangeText={text => setPlayerOName(text)}
+                     maxLength = {10}
+                  />
                </LinearGradient>
                <View style={styles.separator} />
                <TouchableOpacity 
