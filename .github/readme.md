@@ -38,7 +38,7 @@ Baixe o .zip deste repositório ou clone usando CLI do git
 
 **Usando git CLI**
 ```shell
-$ git clone https://github.com/pmqueiroz/dsdm-trab.git xo-games
+$ git clone https://github.com/pmqueiroz/xo-games.git xo-games
 ```
 #### Rodando em sua máquina
 
@@ -69,11 +69,11 @@ Se você quiser ajudar a melhorar o nosso código siga os passos abaixo
 ```ps
 # Faça o fork desse repositório usando a CLI do Github
 # Se você não tem a CLI do Github instalada faça manualmente no site.
-$ gh repo fork pmqueiroz/dsdm-trab
+$ gh repo fork pmqueiroz/xo-games
 
 # Clone seu fork
 $ git clone {your-fork-url}
-$ cd dsdm-trab
+$ cd xo-games
 
 # Crie uma branch com sua feature
 $ git checkout -b {branch-name}
@@ -92,11 +92,11 @@ This project is under the MIT license. See the [LICENSE][license-url] for more i
 
 [status-badge]: https://img.shields.io/badge/status-building-important?logo=tool
 [proffy-apk-badge]: https://img.shields.io/badge/Apk-download-important?logo=android&color=%233575F8
-[license-badge]: https://img.shields.io/github/license/pmqueiroz/dsdm-trab?color=%233575F8
-[license-url]: https://github.com/pmqueiroz/dsdm-trab/blob/master/LICENSE
-[issues-url]: https://github.com/pmqueiroz/dsdm-trab/issues
-[download-button]: https://github-readme-perks.vercel.app/api/button?content=Baixar%20Repo&link=https://github.com/pmqueiroz/dsdm-trab/archive/master.zip&logo=github&bgColor=%233575F8
-[download-url]: https://github.com/pmqueiroz/dsdm-trab/archive/master.zip
+[license-badge]: https://img.shields.io/github/license/pmqueiroz/xo-games?color=%233575F8
+[license-url]: https://github.com/pmqueiroz/xo-games/blob/master/LICENSE
+[issues-url]: https://github.com/pmqueiroz/xo-games/issues
+[download-button]: https://github-readme-perks.vercel.app/api/button?content=Baixar%20Repo&link=https://github.com/pmqueiroz/xo-games/archive/master.zip&logo=github&bgColor=%233575F8
+[download-url]: https://github.com/pmqueiroz/xo-games/archive/master.zip
 [node-url]: https://nodejs.org/en
 [yarn-url]: https://classic.yarnpkg.com/
 [npm-url]:  https://www.npmjs.com/
