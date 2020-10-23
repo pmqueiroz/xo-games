@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     width: '90%',
     minHeight: 200,
     marginBottom: 60,
+    resizeMode: 'contain',
    },
  
    button: {
