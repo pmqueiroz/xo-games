@@ -8,6 +8,12 @@ const styles = StyleSheet.create({
       width: "100%",
       height: "100%",
    },
+   screen: {
+      alignItems: "center",
+      justifyContent: "space-around",
+      width: "100%",
+      height: "100%",
+   },
 
    tile: {
       borderWidth: 1,
@@ -81,6 +87,82 @@ const styles = StyleSheet.create({
       height: 35,
       resizeMode: "contain",
    },
+
+   modalContainer: {
+      backgroundColor: "#FFF",
+      width: '90%',
+      height: 'auto',
+      alignItems: "center",
+      justifyContent: "center",
+      shadowOffset: { width: 0, height: 0 },
+      shadowColor: "black",
+      shadowOpacity: 0.3,
+      shadowRadius: 30,
+      padding: 20,
+      borderRadius: 20,
+      paddingVertical: 40,
+   },
+
+   titleText: {
+      fontFamily: 'Roboto_500Medium',
+      fontSize: 24,
+      color: '#3E5A82' 
+   },
+
+   separator: {
+      borderBottomColor: '#ADA6A6',
+      borderBottomWidth: 1.5,
+      marginVertical: 15,
+      width: "80%",
+   },
+
+   nameInput: {
+      backgroundColor: "#FFF",
+      width: '95%',
+      height: '70%',
+      borderRadius: 50,
+      paddingLeft: 10,
+   },
+
+   linearGradient: {
+      marginVertical: 15,
+      width: "75%",
+      height: 45,
+      borderRadius: 50,
+      justifyContent: 'center',
+      alignItems: 'center'
+   },
+
+   button: {
+      backgroundColor: '#3879F9',
+      width: 120,
+      height: 35,
+      paddingVertical: 5,
+      paddingHorizontal: 10,
+      borderRadius: 70,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginTop: 15,
+      shadowOffset:{ width: 0,  height: 0 },
+      shadowColor: 'black',
+      shadowOpacity: 0.3,
+      shadowRadius: 10,
+   },
+
+   buttonWhite: {
+      backgroundColor: '#FFF',
+   },
+
+   buttonText: {
+      color: '#FFF',
+      fontFamily: 'Roboto_400Regular',
+      fontSize: 15,
+   },
+
+   buttonTextBlack: {
+      color: '#000',
+   },
+
 });
 
 export default styles;

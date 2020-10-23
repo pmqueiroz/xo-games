@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { View, Image, TouchableOpacity, Text } from "react-native";
+import { 
+   View, 
+   Image, 
+   TouchableOpacity, 
+   Text,
+   TextInput
+} from "react-native";
+import { LinearGradient } from 'expo-linear-gradient';
+
+import Modal from '../../Components/Modal';
 
 import styles from "./styles";
 import XImg from "../../images/X.png";
@@ -15,11 +24,12 @@ export default function TicTacToe() {
 
    const [currentPlayer, setCurrentPlayer] = useState(1);
    const [board, setBoard] = useState(initialBoardState);
+   const [modalVisible, setModalVisible] = useState(true);
 
    const [scoreboard, setScoreboard] = useState([0, 0]);
 
-   const playerXName = "Player 1";
-   const playerOName = "Player 2";
+   const playerXName = "Player X";
+   const playerOName = "Player O";
 
    function renderIcon(row: number, column: number) {
       const value = board[row][column];
@@ -223,11 +233,48 @@ export default function TicTacToe() {
          <TouchableOpacity
             style={styles.config}
             onPress={() => {
-               setScoreboard([0, 0]);
+               setModalVisible(!modalVisible);
             }}
          >
             <Image style={styles.buttonIcon} source={CogImg}></Image>
          </TouchableOpacity>
+         <Modal
+            visible={modalVisible}
+         >
+            <View  style={styles.modalContainer}>
+               <Text style={styles.titleText}>
+                  Settings
+               </Text>
+               <View style={styles.separator} />
+               <LinearGradient 
+                  start={[0, 0.5]} 
+                  end={[1, 0.5]} 
+                  colors={['#3575F8', '#80D9DA']}
+                  style={styles.linearGradient}
+               >
+                  <TextInput placeholder={playerXName} style={[styles.nameInput]} />
+               </LinearGradient>
+               <LinearGradient 
+                  start={[0, 0.5]} 
+                  end={[1, 0.5]} 
+                  colors={['#F77634', '#F1D06E']}
+                  style={styles.linearGradient}
+               
+               >
+                  <TextInput placeholder={playerOName} style={[styles.nameInput]} />
+               </LinearGradient>
+               <View style={styles.separator} />
+               <TouchableOpacity style={styles.button}>
+                  <Text style={styles.buttonText}>Reset Game</Text>
+               </TouchableOpacity>
+               <TouchableOpacity style={styles.button}>
+                  <Text style={styles.buttonText}>Menu</Text>
+               </TouchableOpacity>
+               <TouchableOpacity style={[styles.button, styles.buttonWhite]}>
+                  <Text style={[styles.buttonText, styles.buttonTextBlack]}>Continue</Text>
+               </TouchableOpacity>
+            </View>
+         </Modal>
       </View>
    );
 }
