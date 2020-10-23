@@ -54,17 +54,14 @@ export default function TicTacToe() {
       const winner = calculateWinner();
       const currentScore = scoreboard.slice();
       if (winner === 1) {
-         console.log("Player X wins this game");
          currentScore[0]++;
          setScoreboard(currentScore);
          resetGame();
       } else if (winner === -1) {
-         console.log("Player O wins this game");
          currentScore[1]++;
          setScoreboard(currentScore);
          resetGame();
       } else if (winner === 0) {
-         console.log("Tied game");
          resetGame();
       }
    }
