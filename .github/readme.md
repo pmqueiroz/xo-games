@@ -21,25 +21,26 @@
 * [Contribuindo](#Contribuindo-)
 * [License](#License-)
 ## Começando 🚀
-**Requisitos**
+#### Requisitos
 
 Para rodar essa aplicação em sua máquina como desenvolvedor você precisa ter instalado:
 * [Node.js][node-url]
 * [Yarn][yarn-url] or [npm][npm-url]
 * [Expo][expo-url]
 
-**Download**
+#### Download
 
 Baixe o .zip deste repositório ou clone usando CLI do git
 
-#### Download do Repositório
+**Download do Repositório**
+
 [![Download Repo][download-button]][download-url]
 
-#### Usando git CLI
+**Usando git CLI**
 ```shell
 $ git clone https://github.com/pmqueiroz/dsdm-trab.git xo-games
 ```
-**Rodando em sua máquina**
+#### Rodando em sua máquina
 
 ```shell
 $ cd {path to your clone}
