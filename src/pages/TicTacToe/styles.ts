@@ -136,7 +136,6 @@ const styles = StyleSheet.create({
       height: '70%',
       borderRadius: 50,
       paddingLeft: 10,
-      outline: 'none'
    },
 
    linearGradient: {
