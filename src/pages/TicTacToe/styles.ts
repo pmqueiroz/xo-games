@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
       width: "100%",
       height: "100%",
    },
+   
    screen: {
       alignItems: "center",
       justifyContent: "space-around",
@@ -69,12 +70,14 @@ const styles = StyleSheet.create({
       color: "#3E5A82",
       fontFamily: "Roboto_500Medium",
       fontSize: 20,
+      flex: 1,
+      textAlign: 'center',
    },
 
-   
    activeX: {
       color: '#3879F9',
    },
+
    activeO: {
       color: "#F77634",
    },
