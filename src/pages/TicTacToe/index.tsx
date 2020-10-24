@@ -372,7 +372,7 @@ export default function TicTacToe() {
               style={styles.button}
               onPress={() => {
                 setPlayingVsAI(!playingVsAI);
-                resetGame();
+                fullResetGame();
 
                 setModalVisible(!modalVisible);
               }}
