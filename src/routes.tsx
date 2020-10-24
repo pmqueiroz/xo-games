@@ -11,8 +11,8 @@ export default function Routes() {
    return (
       <NavigationContainer>
          <Navigator screenOptions={{ headerShown: false }}>
-            <Screen name="TicTacToe" component={TicTacToe} />
             <Screen name="Home" component={Home} />
+            <Screen name="TicTacToe" component={TicTacToe} />
          </Navigator>
       </NavigationContainer>
    );

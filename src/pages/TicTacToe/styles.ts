@@ -1,4 +1,5 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+const windowWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
    container: {
@@ -8,7 +9,7 @@ const styles = StyleSheet.create({
       width: "100%",
       height: "100%",
    },
-   
+
    screen: {
       alignItems: "center",
       justifyContent: "space-around",
@@ -19,8 +20,8 @@ const styles = StyleSheet.create({
    tile: {
       borderWidth: 1,
       borderColor: "#ADA6A6",
-      width: '25vw',
-      height: '25vw',
+      width: windowWidth * 0.25,
+      height: windowWidth * 0.25,
       maxWidth: 100,
       maxHeight: 100,
       alignItems: "center",
@@ -71,11 +72,11 @@ const styles = StyleSheet.create({
       fontFamily: "Roboto_500Medium",
       fontSize: 20,
       flex: 1,
-      textAlign: 'center',
+      textAlign: "center",
    },
 
    activeX: {
-      color: '#3879F9',
+      color: "#3879F9",
    },
 
    activeO: {
@@ -103,9 +104,9 @@ const styles = StyleSheet.create({
 
    modalContainer: {
       backgroundColor: "#FFF",
-      width: '90%',
+      width: "90%",
       maxWidth: 500,
-      height: 'auto',
+      height: "auto",
       alignItems: "center",
       justifyContent: "center",
       shadowOffset: { width: 0, height: 0 },
@@ -118,13 +119,13 @@ const styles = StyleSheet.create({
    },
 
    titleText: {
-      fontFamily: 'Roboto_500Medium',
+      fontFamily: "Roboto_500Medium",
       fontSize: 24,
-      color: '#3E5A82'
+      color: "#3E5A82",
    },
 
    separator: {
-      borderBottomColor: '#ADA6A6',
+      borderBottomColor: "#ADA6A6",
       borderBottomWidth: 1.5,
       marginVertical: 15,
       width: "80%",
@@ -132,8 +133,8 @@ const styles = StyleSheet.create({
 
    nameInput: {
       backgroundColor: "#FFF",
-      width: '95%',
-      height: '70%',
+      width: "95%",
+      height: "70%",
       borderRadius: 50,
       paddingLeft: 10,
    },
@@ -143,40 +144,39 @@ const styles = StyleSheet.create({
       width: "75%",
       height: 45,
       borderRadius: 50,
-      justifyContent: 'center',
-      alignItems: 'center'
+      justifyContent: "center",
+      alignItems: "center",
    },
 
    button: {
-      backgroundColor: '#3879F9',
+      backgroundColor: "#3879F9",
       width: 120,
       height: 35,
       paddingVertical: 5,
       paddingHorizontal: 10,
       borderRadius: 70,
-      alignItems: 'center',
-      justifyContent: 'center',
+      alignItems: "center",
+      justifyContent: "center",
       marginTop: 15,
-      shadowOffset:{ width: 0,  height: 0 },
-      shadowColor: 'black',
+      shadowOffset: { width: 0, height: 0 },
+      shadowColor: "black",
       shadowOpacity: 0.3,
       shadowRadius: 10,
    },
 
    buttonWhite: {
-      backgroundColor: '#FFF',
+      backgroundColor: "#FFF",
    },
 
    buttonText: {
-      color: '#FFF',
-      fontFamily: 'Roboto_400Regular',
+      color: "#FFF",
+      fontFamily: "Roboto_400Regular",
       fontSize: 15,
    },
 
    buttonTextBlack: {
-      color: '#000',
+      color: "#000",
    },
-
 });
 
 export default styles;
