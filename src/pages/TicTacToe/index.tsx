@@ -1,391 +1,397 @@
-import React, { useState } from "react";
-import { View, Image, TouchableOpacity, Text, TextInput } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { useNavigation } from "@react-navigation/native";
+import React, { useState } from 'react';
+import {
+  View, Image, TouchableOpacity, Text, TextInput,
+} from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
 
-import Modal from "../../Components/Modal";
+import Modal from '../../Components/Modal';
 
-import styles from "./styles";
-import XImg from "../../images/X.png";
-import OImg from "../../images/O.png";
-import CogImg from "../../images/Cog.png";
+import styles from './styles';
+import XImg from '../../images/X.png';
+import OImg from '../../images/O.png';
+import CogImg from '../../images/Cog.png';
 
 export default function TicTacToe() {
-   const navigation = useNavigation();
+  const navigation = useNavigation();
 
-   function handleGoToMenu() {
-      fullResetGame();
-      navigation.navigate("Home");
-   }
+  function handleGoToMenu() {
+    fullResetGame();
+    navigation.navigate('Home');
+  }
 
-   function fullResetGame() {
-      setModalVisible(false);
+  function fullResetGame() {
+    setModalVisible(false);
+    setBoard(initialBoardState);
+    setCurrentPlayer(1);
+    setScoreboard([0, 0]);
+  }
+
+  const initialBoardState = [
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
+  ];
+
+  const [playingVsAI, setPlayingVsAI] = useState(false);
+  const [currentPlayer, setCurrentPlayer] = useState(1);
+  const [board, setBoard] = useState(initialBoardState);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [scoreboard, setScoreboard] = useState([0, 0]);
+  const [playerXName, setPlayerXName] = useState('Player X');
+  const [playerOName, setPlayerOName] = useState('Player O');
+
+  const delay = (ms: any) => new Promise((res) => setTimeout(res, ms));
+
+  function renderIcon(row: number, column: number) {
+    const value = board[row][column];
+
+    switch (value) {
+      case 1:
+        return <Image source={XImg} style={styles.tileIcon} />;
+      case -1:
+        return <Image source={OImg} style={styles.tileIcon} />;
+      default:
+        return <View />;
+    }
+  }
+
+  function resetGame() {
+    delay(500).then(() => {
       setBoard(initialBoardState);
       setCurrentPlayer(1);
-      setScoreboard([0, 0]);
-   }
+    });
+  }
 
-   const initialBoardState = [
-      [0, 0, 0],
-      [0, 0, 0],
-      [0, 0, 0],
-   ];
+  function checkWinner() {
+    const winner = calculateWinner();
+    const currentScore = scoreboard.slice();
+    if (winner === 1) {
+      currentScore[0]++;
+      setScoreboard(currentScore);
+      resetGame();
+      return true;
+    } if (winner === -1) {
+      currentScore[1]++;
+      setScoreboard(currentScore);
+      resetGame();
+      return true;
+    } if (winner === 0) {
+      resetGame();
+      return true;
+    }
+    return false;
+  }
 
-   const [playingVsAI, setPlayingVsAI] = useState(false);
-   const [currentPlayer, setCurrentPlayer] = useState(1);
-   const [board, setBoard] = useState(initialBoardState);
-   const [modalVisible, setModalVisible] = useState(false);
-   const [scoreboard, setScoreboard] = useState([0, 0]);
-   const [playerXName, setPlayerXName] = useState("Player X");
-   const [playerOName, setPlayerOName] = useState("Player O");
+  function onTilePress(row: number, column: number) {
+    const nextBoard = board.slice();
 
-   const delay = (ms: any) => new Promise((res) => setTimeout(res, ms));
+    if (nextBoard[row][column] !== 0) {
+      return;
+    }
 
-   function renderIcon(row: number, column: number) {
-      const value = board[row][column];
+    nextBoard[row][column] = currentPlayer;
+    setBoard(nextBoard);
 
-      switch (value) {
-         case 1:
-            return <Image source={XImg} style={styles.tileIcon} />;
-         case -1:
-            return <Image source={OImg} style={styles.tileIcon} />;
-         default:
-            return <View />;
-      }
-   }
+    if (checkWinner()) {
+      return;
+    }
 
-   function resetGame() {
+    if (playingVsAI) {
+      setCurrentPlayer(-1);
       delay(500).then(() => {
-         setBoard(initialBoardState);
-         setCurrentPlayer(1);
+        AIPlay();
       });
-   }
+    } else {
+      const player = currentPlayer === 1 ? -1 : 1;
+      setCurrentPlayer(player);
+    }
+  }
 
-   function checkWinner() {
-      const winner = calculateWinner();
-      const currentScore = scoreboard.slice();
-      if (winner === 1) {
-         currentScore[0]++;
-         setScoreboard(currentScore);
-         resetGame();
-         return true;
-      } else if (winner === -1) {
-         currentScore[1]++;
-         setScoreboard(currentScore);
-         resetGame();
-         return true;
-      } else if (winner === 0) {
-         resetGame();
-         return true;
+  function calculateWinner() {
+    const currentGame = board;
+    let check;
+
+    for (let i = 0; i < 3; i++) {
+      check = currentGame[i][0] + currentGame[i][1] + currentGame[i][2];
+
+      if (check === 3) {
+        return 1;
+      } if (check === -3) {
+        return -1;
       }
-      return false;
-   }
+    }
 
-   function onTilePress(row: number, column: number) {
-      const nextBoard = board.slice();
+    for (let i = 0; i < 3; i++) {
+      check = currentGame[0][i] + currentGame[1][i] + currentGame[2][i];
 
-      if (nextBoard[row][column] !== 0) {
-         return;
+      if (check === 3) {
+        return 1;
+      } if (check === -3) {
+        return -1;
       }
+    }
 
-      nextBoard[row][column] = currentPlayer;
+    check = currentGame[0][0] + currentGame[1][1] + currentGame[2][2];
+    if (check === 3) {
+      return 1;
+    } if (check === -3) {
+      return -1;
+    }
+
+    check = currentGame[2][0] + currentGame[1][1] + currentGame[0][2];
+    if (check === 3) {
+      return 1;
+    } if (check === -3) {
+      return -1;
+    }
+
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (currentGame[i][j] === 0) {
+          return 3;
+        }
+      }
+    }
+
+    return 0;
+  }
+
+  function AIPlay() {
+    const currentGame = board;
+    const nextBoard = board.slice();
+
+    let i = Math.floor(Math.random() * Math.floor(3));
+    let j = Math.floor(Math.random() * Math.floor(3));
+
+    while (currentGame[i][j] !== 0) {
+      i = Math.floor(Math.random() * Math.floor(3));
+      j = Math.floor(Math.random() * Math.floor(3));
+    }
+
+    if (currentGame[i][j] === 0) {
+      nextBoard[i][j] = -1;
       setBoard(nextBoard);
+    }
 
-      if (checkWinner()) {
-         return;
-      }
+    checkWinner();
 
-      if (playingVsAI) {
-         setCurrentPlayer(-1);
-         delay(500).then(() => {
-            AIPlay();
-         });
-      } else {
-         const player = currentPlayer == 1 ? -1 : 1;
-         setCurrentPlayer(player);
-      }
-   }
+    setCurrentPlayer(1);
+  }
 
-   function calculateWinner() {
-      const currentGame = board;
-      var check;
-
-      for (var i = 0; i < 3; i++) {
-         check = currentGame[i][0] + currentGame[i][1] + currentGame[i][2];
-
-         if (check == 3) {
-            return 1;
-         } else if (check == -3) {
-            return -1;
-         }
-      }
-
-      for (var i = 0; i < 3; i++) {
-         check = currentGame[0][i] + currentGame[1][i] + currentGame[2][i];
-
-         if (check == 3) {
-            return 1;
-         } else if (check == -3) {
-            return -1;
-         }
-      }
-
-      check = currentGame[0][0] + currentGame[1][1] + currentGame[2][2];
-      if (check == 3) {
-         return 1;
-      } else if (check == -3) {
-         return -1;
-      }
-
-      check = currentGame[2][0] + currentGame[1][1] + currentGame[0][2];
-      if (check == 3) {
-         return 1;
-      } else if (check == -3) {
-         return -1;
-      }
-
-      for (let i = 0; i < 3; i++) {
-         for (let j = 0; j < 3; j++) {
-            if (currentGame[i][j] === 0) {
-               return 3;
-            }
-         }
-      }
-
-      return 0;
-   }
-
-   function AIPlay() {
-      const currentGame = board;
-      const nextBoard = board.slice();
-
-      let i = Math.floor(Math.random() * Math.floor(3));
-      let j = Math.floor(Math.random() * Math.floor(3));
-
-      while (currentGame[i][j] !== 0) {
-         i = Math.floor(Math.random() * Math.floor(3));
-         j = Math.floor(Math.random() * Math.floor(3));
-      }
-
-      if (currentGame[i][j] === 0) {
-         nextBoard[i][j] = -1;
-         setBoard(nextBoard);
-      }
-
-      checkWinner();
-
-      setCurrentPlayer(1);
-   }
-
-   return (
-      <View style={styles.container}>
-         <View style={styles.scoreboard}>
-            <Text
-               style={[
-                  styles.scoreText,
-                  currentPlayer === 1 ? styles.activeX : null,
-               ]}
-            >
-               {playerXName}
-            </Text>
-            <View style={styles.score}>
-               <Text style={styles.scoreText}>
-                  {scoreboard[0]} - {scoreboard[1]}
-               </Text>
-            </View>
-            <Text
-               style={[
-                  styles.scoreText,
-                  currentPlayer === -1 ? styles.activeO : null,
-               ]}
-            >
-               {playingVsAI ? "AI" : playerOName}
-            </Text>
-         </View>
-
-         <View style={styles.canvas}>
-            <View style={{ flexDirection: "row" }}>
-               <TouchableOpacity
-                  onPress={() => {
-                     if (!(playingVsAI && currentPlayer === -1)) {
-                        onTilePress(0, 0);
-                     }
-                  }}
-                  style={[
-                     styles.tile,
-                     { borderLeftWidth: 0, borderTopWidth: 0 },
-                  ]}
-               >
-                  {renderIcon(0, 0)}
-               </TouchableOpacity>
-               <TouchableOpacity
-                  onPress={() => {
-                     if (!(playingVsAI && currentPlayer === -1)) {
-                        onTilePress(0, 1);
-                     }
-                  }}
-                  style={[styles.tile, { borderTopWidth: 0 }]}
-               >
-                  {renderIcon(0, 1)}
-               </TouchableOpacity>
-               <TouchableOpacity
-                  onPress={() => {
-                     if (!(playingVsAI && currentPlayer === -1)) {
-                        onTilePress(0, 2);
-                     }
-                  }}
-                  style={[
-                     styles.tile,
-                     { borderRightWidth: 0, borderTopWidth: 0 },
-                  ]}
-               >
-                  {renderIcon(0, 2)}
-               </TouchableOpacity>
-            </View>
-            <View style={{ flexDirection: "row" }}>
-               <TouchableOpacity
-                  onPress={() => {
-                     if (!(playingVsAI && currentPlayer === -1)) {
-                        onTilePress(1, 0);
-                     }
-                  }}
-                  style={[styles.tile, { borderLeftWidth: 0 }]}
-               >
-                  {renderIcon(1, 0)}
-               </TouchableOpacity>
-               <TouchableOpacity
-                  onPress={() => {
-                     if (!(playingVsAI && currentPlayer === -1)) {
-                        onTilePress(1, 1);
-                     }
-                  }}
-                  style={styles.tile}
-               >
-                  {renderIcon(1, 1)}
-               </TouchableOpacity>
-               <TouchableOpacity
-                  onPress={() => {
-                     if (!(playingVsAI && currentPlayer === -1)) {
-                        onTilePress(1, 2);
-                     }
-                  }}
-                  style={[styles.tile, { borderRightWidth: 0 }]}
-               >
-                  {renderIcon(1, 2)}
-               </TouchableOpacity>
-            </View>
-            <View style={{ flexDirection: "row" }}>
-               <TouchableOpacity
-                  onPress={() => {
-                     if (!(playingVsAI && currentPlayer === -1)) {
-                        onTilePress(2, 0);
-                     }
-                  }}
-                  style={[
-                     styles.tile,
-                     { borderLeftWidth: 0, borderBottomWidth: 0 },
-                  ]}
-               >
-                  {renderIcon(2, 0)}
-               </TouchableOpacity>
-               <TouchableOpacity
-                  onPress={() => {
-                     if (!(playingVsAI && currentPlayer === -1)) {
-                        onTilePress(2, 1);
-                     }
-                  }}
-                  style={[styles.tile, { borderBottomWidth: 0 }]}
-               >
-                  {renderIcon(2, 1)}
-               </TouchableOpacity>
-               <TouchableOpacity
-                  onPress={() => {
-                     if (!(playingVsAI && currentPlayer === -1)) {
-                        onTilePress(2, 2);
-                     }
-                  }}
-                  style={[
-                     styles.tile,
-                     { borderRightWidth: 0, borderBottomWidth: 0 },
-                  ]}
-               >
-                  {renderIcon(2, 2)}
-               </TouchableOpacity>
-            </View>
-         </View>
-
-         <TouchableOpacity
-            style={styles.config}
-            onPress={() => {
-               setModalVisible(!modalVisible);
-            }}
-         >
-            <Image style={styles.buttonIcon} source={CogImg}></Image>
-         </TouchableOpacity>
-
-         <Modal visible={modalVisible}>
-            <View style={styles.modalContainer}>
-               <Text style={styles.titleText}>Settings</Text>
-               <View style={styles.separator} />
-               <LinearGradient
-                  start={[0, 0.5]}
-                  end={[1, 0.5]}
-                  colors={["#3575F8", "#80D9DA"]}
-                  style={styles.linearGradient}
-               >
-                  <TextInput
-                     placeholder={"player X"}
-                     style={[styles.nameInput]}
-                     onChangeText={(text) => setPlayerXName(text)}
-                     maxLength={10}
-                  />
-               </LinearGradient>
-               <LinearGradient
-                  start={[0, 0.5]}
-                  end={[1, 0.5]}
-                  colors={["#F77634", "#F1D06E"]}
-                  style={styles.linearGradient}
-               >
-                  <TextInput
-                     editable={!playingVsAI}
-                     placeholder={"Player O"}
-                     style={[styles.nameInput]}
-                     onChangeText={(text) => setPlayerOName(text)}
-                     maxLength={10}
-                  />
-               </LinearGradient>
-               <View style={styles.separator} />
-               <TouchableOpacity style={styles.button} onPress={fullResetGame}>
-                  <Text style={styles.buttonText}>Reset Game</Text>
-               </TouchableOpacity>
-               <TouchableOpacity style={styles.button} onPress={handleGoToMenu}>
-                  <Text style={styles.buttonText}>Menu</Text>
-               </TouchableOpacity>
-               <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => {
-                     setPlayingVsAI(!playingVsAI);
-                     resetGame();
-
-                     setModalVisible(!modalVisible);
-                  }}
-               >
-                  <Text style={styles.buttonText}>
-                     {playingVsAI ? "Play PvP" : "Play vs IA"}
-                  </Text>
-               </TouchableOpacity>
-               <TouchableOpacity
-                  style={[styles.button, styles.buttonWhite]}
-                  onPress={() => {
-                     setModalVisible(!modalVisible);
-                  }}
-               >
-                  <Text style={[styles.buttonText, styles.buttonTextBlack]}>
-                     Continue
-                  </Text>
-               </TouchableOpacity>
-            </View>
-         </Modal>
+  return (
+    <View style={styles.container}>
+      <View style={styles.scoreboard}>
+        <Text
+          style={[
+            styles.scoreText,
+            currentPlayer === 1 ? styles.activeX : null,
+          ]}
+        >
+          {playerXName}
+        </Text>
+        <View style={styles.score}>
+          <Text style={styles.scoreText}>
+            {scoreboard[0]}
+            {' '}
+            -
+            {' '}
+            {scoreboard[1]}
+          </Text>
+        </View>
+        <Text
+          style={[
+            styles.scoreText,
+            currentPlayer === -1 ? styles.activeO : null,
+          ]}
+        >
+          {playingVsAI ? 'AI' : playerOName}
+        </Text>
       </View>
-   );
+
+      <View style={styles.canvas}>
+        <View style={{ flexDirection: 'row' }}>
+          <TouchableOpacity
+            onPress={() => {
+              if (!(playingVsAI && currentPlayer === -1)) {
+                onTilePress(0, 0);
+              }
+            }}
+            style={[
+              styles.tile,
+              { borderLeftWidth: 0, borderTopWidth: 0 },
+            ]}
+          >
+            {renderIcon(0, 0)}
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              if (!(playingVsAI && currentPlayer === -1)) {
+                onTilePress(0, 1);
+              }
+            }}
+            style={[styles.tile, { borderTopWidth: 0 }]}
+          >
+            {renderIcon(0, 1)}
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              if (!(playingVsAI && currentPlayer === -1)) {
+                onTilePress(0, 2);
+              }
+            }}
+            style={[
+              styles.tile,
+              { borderRightWidth: 0, borderTopWidth: 0 },
+            ]}
+          >
+            {renderIcon(0, 2)}
+          </TouchableOpacity>
+        </View>
+        <View style={{ flexDirection: 'row' }}>
+          <TouchableOpacity
+            onPress={() => {
+              if (!(playingVsAI && currentPlayer === -1)) {
+                onTilePress(1, 0);
+              }
+            }}
+            style={[styles.tile, { borderLeftWidth: 0 }]}
+          >
+            {renderIcon(1, 0)}
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              if (!(playingVsAI && currentPlayer === -1)) {
+                onTilePress(1, 1);
+              }
+            }}
+            style={styles.tile}
+          >
+            {renderIcon(1, 1)}
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              if (!(playingVsAI && currentPlayer === -1)) {
+                onTilePress(1, 2);
+              }
+            }}
+            style={[styles.tile, { borderRightWidth: 0 }]}
+          >
+            {renderIcon(1, 2)}
+          </TouchableOpacity>
+        </View>
+        <View style={{ flexDirection: 'row' }}>
+          <TouchableOpacity
+            onPress={() => {
+              if (!(playingVsAI && currentPlayer === -1)) {
+                onTilePress(2, 0);
+              }
+            }}
+            style={[
+              styles.tile,
+              { borderLeftWidth: 0, borderBottomWidth: 0 },
+            ]}
+          >
+            {renderIcon(2, 0)}
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              if (!(playingVsAI && currentPlayer === -1)) {
+                onTilePress(2, 1);
+              }
+            }}
+            style={[styles.tile, { borderBottomWidth: 0 }]}
+          >
+            {renderIcon(2, 1)}
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              if (!(playingVsAI && currentPlayer === -1)) {
+                onTilePress(2, 2);
+              }
+            }}
+            style={[
+              styles.tile,
+              { borderRightWidth: 0, borderBottomWidth: 0 },
+            ]}
+          >
+            {renderIcon(2, 2)}
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      <TouchableOpacity
+        style={styles.config}
+        onPress={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <Image style={styles.buttonIcon} source={CogImg} />
+      </TouchableOpacity>
+
+      <Modal visible={modalVisible}>
+        <View style={styles.modalContainer}>
+          <Text style={styles.titleText}>Settings</Text>
+          <View style={styles.separator} />
+          <LinearGradient
+            start={[0, 0.5]}
+            end={[1, 0.5]}
+            colors={['#3575F8', '#80D9DA']}
+            style={styles.linearGradient}
+          >
+            <TextInput
+              placeholder="Player X"
+              style={[styles.nameInput]}
+              onChangeText={(text) => setPlayerXName(text)}
+              maxLength={10}
+            />
+          </LinearGradient>
+          <LinearGradient
+            start={[0, 0.5]}
+            end={[1, 0.5]}
+            colors={['#F77634', '#F1D06E']}
+            style={styles.linearGradient}
+          >
+            <TextInput
+              editable={!playingVsAI}
+              placeholder="Player O"
+              style={[styles.nameInput]}
+              onChangeText={(text) => setPlayerOName(text)}
+              maxLength={10}
+            />
+          </LinearGradient>
+          <View style={styles.separator} />
+          <TouchableOpacity style={styles.button} onPress={fullResetGame}>
+            <Text style={styles.buttonText}>Reset Game</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={handleGoToMenu}>
+            <Text style={styles.buttonText}>Menu</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              setPlayingVsAI(!playingVsAI);
+              resetGame();
+
+              setModalVisible(!modalVisible);
+            }}
+          >
+            <Text style={styles.buttonText}>
+              {playingVsAI ? 'Play PvP' : 'Play vs IA'}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button, styles.buttonWhite]}
+            onPress={() => {
+              setModalVisible(!modalVisible);
+            }}
+          >
+            <Text style={[styles.buttonText, styles.buttonTextBlack]}>
+              Continue
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+    </View>
+  );
 }
