@@ -334,7 +334,7 @@ export default function TicTacToe() {
                   style={styles.linearGradient}
                >
                   <TextInput
-                     placeholder={playerXName}
+                     placeholder={"player X"}
                      style={[styles.nameInput]}
                      onChangeText={(text) => setPlayerXName(text)}
                      maxLength={10}
@@ -348,7 +348,7 @@ export default function TicTacToe() {
                >
                   <TextInput
                      editable={!playingVsAI}
-                     placeholder={playerOName}
+                     placeholder={"Player O"}
                      style={[styles.nameInput]}
                      onChangeText={(text) => setPlayerOName(text)}
                      maxLength={10}
