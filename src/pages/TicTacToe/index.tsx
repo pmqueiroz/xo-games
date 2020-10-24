@@ -330,66 +330,68 @@ export default function TicTacToe() {
       </TouchableOpacity>
 
       <Modal visible={modalVisible}>
-        <View style={styles.modalContainer}>
-          <Text style={styles.titleText}>Settings</Text>
-          <View style={styles.separator} />
-          <LinearGradient
-            start={[0, 0.5]}
-            end={[1, 0.5]}
-            colors={['#3575F8', '#80D9DA']}
-            style={styles.linearGradient}
-          >
-            <TextInput
-              placeholder="Player X"
-              style={[styles.nameInput]}
-              onChangeText={(text) => setPlayerXName(text)}
-              maxLength={10}
-            />
-          </LinearGradient>
-          <LinearGradient
-            start={[0, 0.5]}
-            end={[1, 0.5]}
-            colors={['#F77634', '#F1D06E']}
-            style={styles.linearGradient}
-          >
-            <TextInput
-              editable={!playingVsAI}
-              placeholder="Player O"
-              style={[styles.nameInput]}
-              onChangeText={(text) => setPlayerOName(text)}
-              maxLength={10}
-            />
-          </LinearGradient>
-          <View style={styles.separator} />
-          <TouchableOpacity style={styles.button} onPress={fullResetGame}>
-            <Text style={styles.buttonText}>Reset Game</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={handleGoToMenu}>
-            <Text style={styles.buttonText}>Menu</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              setPlayingVsAI(!playingVsAI);
-              resetGame();
+        <View style={styles.modalBackground}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.titleText}>Settings</Text>
+            <View style={styles.separator} />
+            <LinearGradient
+              start={[0, 0.5]}
+              end={[1, 0.5]}
+              colors={['#3575F8', '#80D9DA']}
+              style={styles.linearGradient}
+            >
+              <TextInput
+                placeholder="Player X"
+                style={[styles.nameInput]}
+                onChangeText={(text) => setPlayerXName(text)}
+                maxLength={10}
+              />
+            </LinearGradient>
+            <LinearGradient
+              start={[0, 0.5]}
+              end={[1, 0.5]}
+              colors={['#F77634', '#F1D06E']}
+              style={styles.linearGradient}
+            >
+              <TextInput
+                editable={!playingVsAI}
+                placeholder="Player O"
+                style={[styles.nameInput]}
+                onChangeText={(text) => setPlayerOName(text)}
+                maxLength={10}
+              />
+            </LinearGradient>
+            <View style={styles.separator} />
+            <TouchableOpacity style={styles.button} onPress={fullResetGame}>
+              <Text style={styles.buttonText}>Reset Game</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={handleGoToMenu}>
+              <Text style={styles.buttonText}>Menu</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                setPlayingVsAI(!playingVsAI);
+                resetGame();
 
-              setModalVisible(!modalVisible);
-            }}
-          >
-            <Text style={styles.buttonText}>
-              {playingVsAI ? 'Play PvP' : 'Play vs IA'}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.button, styles.buttonWhite]}
-            onPress={() => {
-              setModalVisible(!modalVisible);
-            }}
-          >
-            <Text style={[styles.buttonText, styles.buttonTextBlack]}>
-              Continue
-            </Text>
-          </TouchableOpacity>
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <Text style={styles.buttonText}>
+                {playingVsAI ? 'Play PvP' : 'Play vs IA'}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.button, styles.buttonWhite]}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <Text style={[styles.buttonText, styles.buttonTextBlack]}>
+                Continue
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </Modal>
     </View>

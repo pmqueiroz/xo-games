@@ -123,6 +123,14 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
 
+  modalBackground: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(100,100,100, 0.2)',
+  },
+
   titleText: {
     fontFamily: 'Roboto_500Medium',
     fontSize: 24,
@@ -139,7 +147,7 @@ const styles = StyleSheet.create({
   nameInput: {
     backgroundColor: '#FFF',
     width: '95%',
-    height: '70%',
+    height: '75%',
     borderRadius: 50,
     paddingLeft: 10,
   },
