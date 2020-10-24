@@ -322,6 +322,7 @@ export default function TicTacToe() {
          >
             <Image style={styles.buttonIcon} source={CogImg}></Image>
          </TouchableOpacity>
+
          <Modal visible={modalVisible}>
             <View style={styles.modalContainer}>
                <Text style={styles.titleText}>Settings</Text>
