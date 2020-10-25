@@ -28,7 +28,7 @@ import XImg from '../../images/X.png';
 import OImg from '../../images/O.png';
 import CogImg from '../../images/Cog.png';
 
-export default function TicTacToe() {
+const TicTacToe: React.FC = () => {
   const navigation = useNavigation();
 
   function handleGoToMenu() {
@@ -399,7 +399,7 @@ export default function TicTacToe() {
             >
               <PlayerNameInput
                 placeholder="Player X"
-                onChangeText={(text) => setPlayerXName(text)}
+                onChangeText={(text: string) => setPlayerXName(text)}
                 maxLength={10}
               />
             </LinearGradient>
@@ -419,7 +419,7 @@ export default function TicTacToe() {
               <PlayerNameInput
                 editable={!playingVsAI}
                 placeholder="Player O"
-                onChangeText={(text) => setPlayerOName(text)}
+                onChangeText={(text: string) => setPlayerOName(text)}
                 maxLength={10}
               />
             </LinearGradient>
@@ -463,4 +463,6 @@ export default function TicTacToe() {
       </Modal>
     </Container>
   );
-}
+};
+
+export default TicTacToe;
