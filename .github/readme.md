@@ -3,11 +3,11 @@
 <img width="250px" align="center" src="https://raw.githubusercontent.com/pmqueiroz/dsdm-trab/master/.github/logo.svg"></img>
 
 <p align="center">
-    Trabalho da matéria de Desenvolvimento de Sistemas para Dispositivos Móveis, aplicativo para <i>Android</i> contendo mini games 
+    Trabalho da matéria de Desenvolvimento de Sistemas para Dispositivos Móveis, aplicativo para <i>Android</i> contendo mini games
 </p>
 
 ![Status][status-badge]
-![Apk Download][proffy-apk-badge]
+[![Apk Download][apk-badge]][apk-url]
 [![License][license-badge]][license-url]
 
 </div>
@@ -91,7 +91,8 @@ $ git push origin {branch-name}
 This project is under the MIT license. See the [LICENSE][license-url] for more information.
 
 [status-badge]: https://img.shields.io/badge/status-building-important?logo=tool
-[proffy-apk-badge]: https://img.shields.io/badge/Apk-download-important?logo=android&color=%233575F8
+[apk-badge]: https://img.shields.io/badge/Apk-download-important?logo=android&color=%233575F8
+[apk-url]: https://github.com/pmqueiroz/xo-games/releases/download/v0.0.1-beta/xo-games.apk
 [license-badge]: https://img.shields.io/github/license/pmqueiroz/xo-games?color=%233575F8
 [license-url]: https://github.com/pmqueiroz/xo-games/blob/master/LICENSE
 [issues-url]: https://github.com/pmqueiroz/xo-games/issues
