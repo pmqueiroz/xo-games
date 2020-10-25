@@ -23,11 +23,11 @@ export default function Home() {
         <TouchableOpacity onPress={handleNavigateToTicTacToe} style={styles.button}>
           <Text style={styles.buttonText}>Tic Tac Toe</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => { console.log('certo'); }} style={styles.button}>
+        <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Hangman</Text>
         </TouchableOpacity>
       </View>
-      <StatusBar style="auto" />
+      <StatusBar />
     </View>
   );
 }

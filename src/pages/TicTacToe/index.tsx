@@ -41,7 +41,7 @@ export default function TicTacToe() {
   const [playerXName, setPlayerXName] = useState('Player X');
   const [playerOName, setPlayerOName] = useState('Player O');
 
-  const delay = (ms: any) => new Promise((res) => setTimeout(res, ms));
+  const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
   function renderIcon(row: number, column: number) {
     const value = board[row][column];
@@ -120,9 +120,7 @@ export default function TicTacToe() {
       } if (check === -3) {
         return -1;
       }
-    }
 
-    for (let i = 0; i < 3; i += 1) {
       check = currentGame[0][i] + currentGame[1][i] + currentGame[2][i];
 
       if (check === 3) {
