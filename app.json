@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "dsdm-trab",
-    "slug": "dsdm-trab",
+    "name": "XO Games",
+    "slug": "xo-games",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#F7F9F8"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -17,10 +17,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.pmqueiroz.proffy",
+      "buildNumber": "1.0.0"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "android": {
+      "package": "com.pawee.xogames",
+      "versionCode": 1
     }
   }
 }
