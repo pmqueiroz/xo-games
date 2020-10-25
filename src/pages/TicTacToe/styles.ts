@@ -1,196 +1,143 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { Dimensions } from 'react-native';
+import styled from 'styled-components/native';
 
 const windowWidth = Dimensions.get('window').width;
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#F7F9F8',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    width: '100%',
-    height: '100%',
-  },
+export const Container = styled.View`
+   background-color: #F7F9F8;
+   align-items: center;
+   justify-content: space-around;
+   width: 100%;
+   height: 100%;
+`;
 
-  screen: {
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    width: '100%',
-    height: '100%',
-  },
+export const Scoreboard = styled.View`
+   width: 100%;
+   justify-content: center;
+   align-items: center;
+   flex-direction: row;
+`;
 
-  tile: {
-    borderWidth: 1,
-    borderColor: '#ADA6A6',
-    width: windowWidth * 0.25,
-    height: windowWidth * 0.25,
-    maxWidth: 100,
-    maxHeight: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+export const ScoreboardText = styled.Text`
+   font-weight: 500;
+   color: #3E5A82;
+   font-family: 'Roboto_500Medium';
+   font-size: 20px;
+   flex: 1;
+   text-align: center;
+`;
 
-  tileIcon: {
-    width: 60,
-    height: 60,
-  },
+export const Score = styled.View`
+   background-color: #FFFFFF;
+   width: 70px;
+   height: 30px;
+   border-radius: 50px;
+   justify-content: center;
+   align-items: center;
+   margin: 0 20px;
+   elevation: 5;
+`;
 
-  canvas: {
-    backgroundColor: '#FFFFFF',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-    borderRadius: 20,
-    //  shadowOffset: { width: 0, height: 0 },
-    //  shadowColor: 'black',
-    //  shadowOpacity: 0.3,
-    //  shadowRadius: 30,
-    elevation: 5,
-  },
+export const Canvas = styled.View`
+   background-color: #FFFFFF;
+   align-items: center;
+   justify-content: center;
+   padding: 20px;
+   border-radius: 20px;
+   elevation: 5;
+`;
 
-  scoreboard: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
+export const CanvasRow = styled.View`
+   flex-direction: row;
+`;
 
-  score: {
-    backgroundColor: '#FFFFFF',
-    width: 70,
-    height: 30,
-    borderRadius: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginHorizontal: 20,
-    //  shadowOffset: { width: 0, height: 0 },
-    //  shadowColor: 'black',
-    //  shadowOpacity: 0.3,
-    //  shadowRadius: 10,
-    elevation: 5,
-  },
+export const Tile = styled.TouchableOpacity`
+   border-width: 1px;
+   border-color: #ADA6A6;
+   width: ${windowWidth * 0.25};
+   height: ${windowWidth * 0.25};
+   max-width: 100px;
+   max-height: 100px;
+   align-items: center;
+   justify-content: center;
+`;
 
-  scoreText: {
-    fontWeight: '500',
-    color: '#3E5A82',
-    fontFamily: 'Roboto_500Medium',
-    fontSize: 20,
-    flex: 1,
-    textAlign: 'center',
-  },
+export const TileIcon = styled.Image`
+   width: 60px;
+   height: 60px;
+`;
 
-  activeX: {
-    color: '#3879F9',
-  },
+export const ConfigButton = styled.TouchableOpacity`
+   background-color: #FFFFFF;
+   width: 50px;
+   height: 50px;
+   border-Radius: 25px;
+   justify-content: center;
+   align-items: center;
+   elevation: 5;
+`;
 
-  activeO: {
-    color: '#F77634',
-  },
+export const ConfigButtonIcon = styled.Image`
+   width: 35px;
+   height: 35px;
+`;
 
-  config: {
-    backgroundColor: '#FFFFFF',
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    //  shadowOffset: { width: 0, height: 0 },
-    //  shadowColor: 'black',
-    //  shadowOpacity: 0.3,
-    //  shadowRadius: 10,
-    elevation: 5,
-  },
+export const ModalContainer = styled.View`
+   width: 100%;
+   height: 100%;
+   justify-content: center;
+   align-items: center;
+   background-color: rgba(100,100,100, 0.2);
+`;
 
-  buttonIcon: {
-    width: 35,
-    height: 35,
-    resizeMode: 'contain',
-  },
+export const ModalView = styled.View`
+   background-Color: #FFF;
+   width: 90%;
+   max-Width: 500px;
+   height: auto;
+   align-Items: center;
+   justify-Content: center;
+   padding: 20px;
+   border-Radius: 20px;
+   padding: 40px 0;
+   elevation: 5;
+`;
 
-  modalContainer: {
-    backgroundColor: '#FFF',
-    width: '90%',
-    maxWidth: 500,
-    height: 'auto',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-    borderRadius: 20,
-    paddingVertical: 40,
-    //  shadowOffset: { width: 0, height: 0 },
-    //  shadowColor: 'black',
-    //  shadowOpacity: 0.3,
-    //  shadowRadius: 30,
-    elevation: 5,
-  },
+export const Title = styled.Text`
+   font-family: 'Roboto_500Medium';
+   font-size: 24px;
+   color: #3E5A82;
+`;
 
-  modalBackground: {
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(100,100,100, 0.2)',
-  },
+export const Separator = styled.View`
+   border-Bottom-Color: #ADA6A6;
+   border-Bottom-Width: 1.5px;
+   margin: 15px 0;
+   width: 80%;
+`;
 
-  titleText: {
-    fontFamily: 'Roboto_500Medium',
-    fontSize: 24,
-    color: '#3E5A82',
-  },
+export const PlayerNameInput = styled.TextInput`
+   background-color: #FFF;
+   width: 95%;
+   height: 75%;
+   border-radius: 50px;
+   padding-left: 10px;
+`;
 
-  separator: {
-    borderBottomColor: '#ADA6A6',
-    borderBottomWidth: 1.5,
-    marginVertical: 15,
-    width: '80%',
-  },
+export const Button = styled.TouchableOpacity`
+   background-color: #3879F9;
+   width: 120px;
+   height: 35px;
+   padding: 5px 10px;
+   border-radius: 70px;
+   align-items: center;
+   justify-content: center;
+   margin-top: 15px;
+   elevation: 5;
+`;
 
-  nameInput: {
-    backgroundColor: '#FFF',
-    width: '95%',
-    height: '75%',
-    borderRadius: 50,
-    paddingLeft: 10,
-  },
-
-  linearGradient: {
-    marginVertical: 15,
-    width: '75%',
-    height: 45,
-    borderRadius: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  button: {
-    backgroundColor: '#3879F9',
-    width: 120,
-    height: 35,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 70,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 15,
-    //  shadowOffset: { width: 0, height: 0 },
-    //  shadowColor: 'black',
-    //  shadowOpacity: 0.3,
-    //  shadowRadius: 10,
-    elevation: 5,
-  },
-
-  buttonWhite: {
-    backgroundColor: '#FFF',
-  },
-
-  buttonText: {
-    color: '#FFF',
-    fontFamily: 'Roboto_400Regular',
-    fontSize: 15,
-  },
-
-  buttonTextBlack: {
-    color: '#000',
-  },
-});
-
-export default styles;
+export const ButtonText = styled.Text`
+   color: #FFF;
+   font-family: 'Roboto_400Regular';
+   font-size: 15;
+`;

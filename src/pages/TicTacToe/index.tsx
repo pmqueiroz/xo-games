@@ -1,13 +1,29 @@
 import React, { useState } from 'react';
-import {
-  View, Image, TouchableOpacity, Text, TextInput,
-} from 'react-native';
+import { View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
 import Modal from '../../Components/Modal';
+import {
+  Container,
+  Scoreboard,
+  ScoreboardText,
+  Score,
+  Canvas,
+  CanvasRow,
+  Tile,
+  TileIcon,
+  ConfigButton,
+  ConfigButtonIcon,
+  ModalContainer,
+  ModalView,
+  Title,
+  Separator,
+  PlayerNameInput,
+  Button,
+  ButtonText,
+} from './styles';
 
-import styles from './styles';
 import XImg from '../../images/X.png';
 import OImg from '../../images/O.png';
 import CogImg from '../../images/Cog.png';
@@ -48,9 +64,9 @@ export default function TicTacToe() {
 
     switch (value) {
       case 1:
-        return <Image source={XImg} style={styles.tileIcon} />;
+        return <TileIcon source={XImg} />;
       case -1:
-        return <Image source={OImg} style={styles.tileIcon} />;
+        return <TileIcon source={OImg} />;
       default:
         return <View />;
     }
@@ -238,169 +254,151 @@ export default function TicTacToe() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.scoreboard}>
-        <Text
-          style={[
-            styles.scoreText,
-            currentPlayer === 1 ? styles.activeX : null,
-          ]}
-        >
+    <Container>
+      <Scoreboard>
+        <ScoreboardText>
           {playerXName}
-        </Text>
-        <View style={styles.score}>
-          <Text style={styles.scoreText}>
+        </ScoreboardText>
+        <Score>
+          <ScoreboardText>
             {scoreboard[0]}
             {' '}
             -
             {' '}
             {scoreboard[1]}
-          </Text>
-        </View>
-        <Text
-          style={[
-            styles.scoreText,
-            currentPlayer === -1 ? styles.activeO : null,
-          ]}
-        >
+          </ScoreboardText>
+        </Score>
+        <ScoreboardText>
           {playingVsAI ? 'AI' : playerOName}
-        </Text>
-      </View>
+        </ScoreboardText>
+      </Scoreboard>
 
-      <View style={styles.canvas}>
-        <View style={{ flexDirection: 'row' }}>
-          <TouchableOpacity
+      <Canvas>
+        <CanvasRow>
+          <Tile
             onPress={() => {
               if (!(playingVsAI && currentPlayer === -1)) {
                 onTilePress(0, 0);
               }
             }}
-            style={[
-              styles.tile,
-              { borderLeftWidth: 0, borderTopWidth: 0 },
-            ]}
+            style={{ borderLeftWidth: 0, borderTopWidth: 0 }}
           >
             {renderIcon(0, 0)}
-          </TouchableOpacity>
-          <TouchableOpacity
+          </Tile>
+          <Tile
             onPress={() => {
               if (!(playingVsAI && currentPlayer === -1)) {
                 onTilePress(0, 1);
               }
             }}
-            style={[styles.tile, { borderTopWidth: 0 }]}
+            style={{ borderTopWidth: 0 }}
           >
             {renderIcon(0, 1)}
-          </TouchableOpacity>
-          <TouchableOpacity
+          </Tile>
+          <Tile
             onPress={() => {
               if (!(playingVsAI && currentPlayer === -1)) {
                 onTilePress(0, 2);
               }
             }}
-            style={[
-              styles.tile,
-              { borderRightWidth: 0, borderTopWidth: 0 },
-            ]}
+            style={{ borderRightWidth: 0, borderTopWidth: 0 }}
           >
             {renderIcon(0, 2)}
-          </TouchableOpacity>
-        </View>
-        <View style={{ flexDirection: 'row' }}>
-          <TouchableOpacity
+          </Tile>
+        </CanvasRow>
+        <CanvasRow>
+          <Tile
             onPress={() => {
               if (!(playingVsAI && currentPlayer === -1)) {
                 onTilePress(1, 0);
               }
             }}
-            style={[styles.tile, { borderLeftWidth: 0 }]}
+            style={{ borderLeftWidth: 0 }}
           >
             {renderIcon(1, 0)}
-          </TouchableOpacity>
-          <TouchableOpacity
+          </Tile>
+          <Tile
             onPress={() => {
               if (!(playingVsAI && currentPlayer === -1)) {
                 onTilePress(1, 1);
               }
             }}
-            style={styles.tile}
           >
             {renderIcon(1, 1)}
-          </TouchableOpacity>
-          <TouchableOpacity
+          </Tile>
+          <Tile
             onPress={() => {
               if (!(playingVsAI && currentPlayer === -1)) {
                 onTilePress(1, 2);
               }
             }}
-            style={[styles.tile, { borderRightWidth: 0 }]}
+            style={{ borderRightWidth: 0 }}
           >
             {renderIcon(1, 2)}
-          </TouchableOpacity>
-        </View>
-        <View style={{ flexDirection: 'row' }}>
-          <TouchableOpacity
+          </Tile>
+        </CanvasRow>
+        <CanvasRow>
+          <Tile
             onPress={() => {
               if (!(playingVsAI && currentPlayer === -1)) {
                 onTilePress(2, 0);
               }
             }}
-            style={[
-              styles.tile,
-              { borderLeftWidth: 0, borderBottomWidth: 0 },
-            ]}
+            style={{ borderLeftWidth: 0, borderBottomWidth: 0 }}
           >
             {renderIcon(2, 0)}
-          </TouchableOpacity>
-          <TouchableOpacity
+          </Tile>
+          <Tile
             onPress={() => {
               if (!(playingVsAI && currentPlayer === -1)) {
                 onTilePress(2, 1);
               }
             }}
-            style={[styles.tile, { borderBottomWidth: 0 }]}
+            style={{ borderBottomWidth: 0 }}
           >
             {renderIcon(2, 1)}
-          </TouchableOpacity>
-          <TouchableOpacity
+          </Tile>
+          <Tile
             onPress={() => {
               if (!(playingVsAI && currentPlayer === -1)) {
                 onTilePress(2, 2);
               }
             }}
-            style={[
-              styles.tile,
-              { borderRightWidth: 0, borderBottomWidth: 0 },
-            ]}
+            style={{ borderRightWidth: 0, borderBottomWidth: 0 }}
           >
             {renderIcon(2, 2)}
-          </TouchableOpacity>
-        </View>
-      </View>
+          </Tile>
+        </CanvasRow>
+      </Canvas>
 
-      <TouchableOpacity
-        style={styles.config}
+      <ConfigButton
         onPress={() => {
           setModalVisible(!modalVisible);
         }}
       >
-        <Image style={styles.buttonIcon} source={CogImg} />
-      </TouchableOpacity>
+        <ConfigButtonIcon source={CogImg} resizeMode="contain" />
+      </ConfigButton>
 
       <Modal visible={modalVisible}>
-        <View style={styles.modalBackground}>
-          <View style={styles.modalContainer}>
-            <Text style={styles.titleText}>Settings</Text>
-            <View style={styles.separator} />
+        <ModalContainer>
+          <ModalView>
+            <Title>Settings</Title>
+            <Separator />
             <LinearGradient
               start={[0, 0.5]}
               end={[1, 0.5]}
               colors={['#3575F8', '#80D9DA']}
-              style={styles.linearGradient}
+              style={{
+                marginVertical: 15,
+                width: '75%',
+                height: 45,
+                borderRadius: 50,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
             >
-              <TextInput
+              <PlayerNameInput
                 placeholder="Player X"
-                style={[styles.nameInput]}
                 onChangeText={(text) => setPlayerXName(text)}
                 maxLength={10}
               />
@@ -409,25 +407,30 @@ export default function TicTacToe() {
               start={[0, 0.5]}
               end={[1, 0.5]}
               colors={['#F77634', '#F1D06E']}
-              style={styles.linearGradient}
+              style={{
+                marginVertical: 15,
+                width: '75%',
+                height: 45,
+                borderRadius: 50,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
             >
-              <TextInput
+              <PlayerNameInput
                 editable={!playingVsAI}
                 placeholder="Player O"
-                style={[styles.nameInput]}
                 onChangeText={(text) => setPlayerOName(text)}
                 maxLength={10}
               />
             </LinearGradient>
-            <View style={styles.separator} />
-            <TouchableOpacity style={styles.button} onPress={resetGame}>
-              <Text style={styles.buttonText}>Reset Game</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={handleGoToMenu}>
-              <Text style={styles.buttonText}>Menu</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.button}
+            <Separator />
+            <Button onPress={resetGame}>
+              <ButtonText>Reset Game</ButtonText>
+            </Button>
+            <Button onPress={handleGoToMenu}>
+              <ButtonText>Menu</ButtonText>
+            </Button>
+            <Button
               onPress={() => {
                 setPlayingVsAI(!playingVsAI);
                 resetGame();
@@ -435,23 +438,22 @@ export default function TicTacToe() {
                 setModalVisible(!modalVisible);
               }}
             >
-              <Text style={styles.buttonText}>
+              <ButtonText>
                 {playingVsAI ? 'Play PvP' : 'Play vs IA'}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.button, styles.buttonWhite]}
+              </ButtonText>
+            </Button>
+            <Button // white button
               onPress={() => {
                 setModalVisible(!modalVisible);
               }}
             >
-              <Text style={[styles.buttonText, styles.buttonTextBlack]}>
+              <ButtonText>
                 Continue
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+              </ButtonText>
+            </Button>
+          </ModalView>
+        </ModalContainer>
       </Modal>
-    </View>
+    </Container>
   );
 }
