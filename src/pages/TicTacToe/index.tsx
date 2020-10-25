@@ -16,11 +16,11 @@ export default function TicTacToe() {
   const navigation = useNavigation();
 
   function handleGoToMenu() {
-    fullResetGame();
+    resetGame();
     navigation.navigate('Home');
   }
 
-  function fullResetGame() {
+  function resetGame() {
     setModalVisible(false);
     setBoard(initialBoardState);
     setCurrentPlayer(1);
@@ -56,7 +56,7 @@ export default function TicTacToe() {
     }
   }
 
-  function resetGame() {
+  function resetBoard() {
     delay(500).then(() => {
       setBoard(initialBoardState);
       setCurrentPlayer(1);
@@ -67,17 +67,17 @@ export default function TicTacToe() {
     const winner = calculateWinner();
     const currentScore = scoreboard.slice();
     if (winner === 1) {
-      currentScore[0]++;
+      currentScore[0] += 1;
       setScoreboard(currentScore);
-      resetGame();
+      resetBoard();
       return true;
     } if (winner === -1) {
-      currentScore[1]++;
+      currentScore[1] += 1;
       setScoreboard(currentScore);
-      resetGame();
+      resetBoard();
       return true;
     } if (winner === 0) {
-      resetGame();
+      resetBoard();
       return true;
     }
     return false;
@@ -112,7 +112,7 @@ export default function TicTacToe() {
     const currentGame = board;
     let check;
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i += 1) {
       check = currentGame[i][0] + currentGame[i][1] + currentGame[i][2];
 
       if (check === 3) {
@@ -122,7 +122,7 @@ export default function TicTacToe() {
       }
     }
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i += 1) {
       check = currentGame[0][i] + currentGame[1][i] + currentGame[2][i];
 
       if (check === 3) {
@@ -146,8 +146,8 @@ export default function TicTacToe() {
       return -1;
     }
 
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
+    for (let i = 0; i < 3; i += 1) {
+      for (let j = 0; j < 3; j += 1) {
         if (currentGame[i][j] === 0) {
           return 3;
         }
@@ -161,13 +161,13 @@ export default function TicTacToe() {
     const currentGame = board;
     const nextBoard = board.slice();
 
-    let i = Math.floor(Math.random() * Math.floor(3));
-    let j = Math.floor(Math.random() * Math.floor(3));
+    let i;
+    let j;
 
-    while (currentGame[i][j] !== 0) {
+    do {
       i = Math.floor(Math.random() * Math.floor(3));
       j = Math.floor(Math.random() * Math.floor(3));
-    }
+    } while (currentGame[i][j] !== 0);
 
     if (currentGame[i][j] === 0) {
       nextBoard[i][j] = -1;
@@ -362,7 +362,7 @@ export default function TicTacToe() {
               />
             </LinearGradient>
             <View style={styles.separator} />
-            <TouchableOpacity style={styles.button} onPress={fullResetGame}>
+            <TouchableOpacity style={styles.button} onPress={resetGame}>
               <Text style={styles.buttonText}>Reset Game</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleGoToMenu}>
@@ -372,7 +372,7 @@ export default function TicTacToe() {
               style={styles.button}
               onPress={() => {
                 setPlayingVsAI(!playingVsAI);
-                fullResetGame();
+                resetGame();
 
                 setModalVisible(!modalVisible);
               }}
