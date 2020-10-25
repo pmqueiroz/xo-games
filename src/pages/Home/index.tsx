@@ -1,11 +1,15 @@
 import React from 'react';
-import {
-  Text, View, Image, TouchableOpacity,
-} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useNavigation } from '@react-navigation/native';
 
-import styles from './styles';
+import {
+  Container,
+  Logo,
+  Title,
+  ButtonContainer,
+  Button,
+  ButtonText,
+} from './styles';
 import logoImg from '../../images/Logo.png';
 
 export default function Home() {
@@ -15,19 +19,26 @@ export default function Home() {
     navigation.navigate('TicTacToe');
   }
 
+  function handleNavigateToHangmanGame() {
+    // navigation.navigate('HangmanGame');
+  }
+
   return (
-    <View style={styles.container}>
-      <Image source={logoImg} style={styles.logo} />
-      <Text style={styles.title}>Select the game you wanna play</Text>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={handleNavigateToTicTacToe} style={styles.button}>
-          <Text style={styles.buttonText}>Tic Tac Toe</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Hangman</Text>
-        </TouchableOpacity>
-      </View>
+    <Container>
+      <Logo
+        source={logoImg}
+        resizeMode="contain"
+      />
+      <Title>Select the game you wanna play</Title>
+      <ButtonContainer>
+        <Button onPress={handleNavigateToTicTacToe}>
+          <ButtonText>Tic Tac Toe</ButtonText>
+        </Button>
+        <Button onPress={handleNavigateToHangmanGame}>
+          <ButtonText>Hangman</ButtonText>
+        </Button>
+      </ButtonContainer>
       <StatusBar />
-    </View>
+    </Container>
   );
 }

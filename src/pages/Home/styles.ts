@@ -1,55 +1,48 @@
-import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F7F9F8',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    height: ' 100%',
-  },
+export const Container = styled.View`
+   flex: 1;
+   background-color: #F7F9F8;
+   align-items: center;
+   justify-content: center;
+   width: 100%;
+   height:  100%;
+`;
 
-  title: {
-    fontWeight: '500',
-    color: '#3E5A82',
-    fontFamily: 'Roboto_500Medium',
-    fontSize: 20,
-  },
+export const Logo = styled.Image`
+   width: 90%;
+   min-height: 200px;
+   margin-bottom: 60px;
+`;
 
-  logo: {
-    width: '90%',
-    minHeight: 200,
-    marginBottom: 60,
-    resizeMode: 'contain',
-  },
+export const Title = styled.Text`
+   font-weight: 500;
+   color: #3E5A82;
+   font-family: 'Roboto_500Medium';
+   font-size: 20px;
+`;
 
-  button: {
-    backgroundColor: '#3879F9',
-    width: 150,
-    height: 50,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 70,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 10,
-    //  shadowOffset: { width: 0, height: 5 },
-    //  shadowColor: 'black',
-    //  shadowOpacity: 0.3,
-    //  shadowRadius: 5,
-    elevation: 5,
-  },
+export const ButtonContainer = styled.View`
+   margin-top: 40px;
+`;
 
-  buttonText: {
-    color: '#FFF',
-    fontFamily: 'Roboto_400Regular',
-    fontSize: 15,
-  },
+export const Button = styled.TouchableOpacity`
+   background-color: #3879F9;
+   width: 150px;
+   height: 50px;
+   padding-top: 5px;
+   padding-bottom: 5px;
+   padding-right: 10px;
+   padding-left: 10px;
+   border-radius: 70px;
+   align-items: center;
+   justify-content: center;
+   margin-top: 10px;
+   elevation: 5;
+`;
 
-  buttonContainer: {
-    marginTop: 40,
-  },
-});
-
-export default styles;
+export const ButtonText = styled.Text`
+   color: #FFF;
+   font-family: 'Roboto_400Regular';
+   font-size: 15px;
+`;
