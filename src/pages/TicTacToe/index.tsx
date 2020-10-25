@@ -137,7 +137,7 @@ export default function TicTacToe() {
       return -1;
     }
 
-    check = currentGame[2][0] + currentGame[1][1] + currentGame[0][2];
+    check = currentGame[0][2] + currentGame[1][1] + currentGame[2][0];
     if (check === 3) {
       return 1;
     } if (check === -3) {
@@ -162,12 +162,72 @@ export default function TicTacToe() {
     let i;
     let j;
 
-    do {
-      i = Math.floor(Math.random() * Math.floor(3));
-      j = Math.floor(Math.random() * Math.floor(3));
-    } while (currentGame[i][j] !== 0);
+    const bestPlay:number[] = [];
 
-    if (currentGame[i][j] === 0) {
+    const mainDiagonal = currentGame[0][0] + currentGame[1][1] + currentGame[2][2];
+    const coDiagonal = currentGame[0][2] + currentGame[1][1] + currentGame[2][0];
+
+    if ((coDiagonal === -2) || (coDiagonal === 2)) {
+      if ((currentGame[1][1] + currentGame[2][0] - 1 === -3) ||
+      (currentGame[1][1] + currentGame[2][0] + 1 === 3)) {
+        bestPlay.push(0, 2);
+      }
+      if ((currentGame[0][2] + currentGame[2][0] - 1 === -3) ||
+      (currentGame[0][2] + currentGame[2][0] + 1 === 3)) {
+        bestPlay.push(1, 1);
+      }
+      if ((currentGame[0][2] + currentGame[1][1] - 1 === -3) ||
+      (currentGame[0][2] + currentGame[1][1] + 1 === 3)) {
+        bestPlay.push(2, 0);
+      }
+    }
+
+    if ((mainDiagonal === -2) || (mainDiagonal === 2)) {
+      if ((currentGame[0][0] + currentGame[1][1] - 1 === -3) ||
+      (currentGame[0][0] + currentGame[1][1] + 1 === 3)) {
+        bestPlay.push(2, 2);
+      }
+      if ((currentGame[0][0] + currentGame[2][2] - 1 === -3) ||
+      (currentGame[0][0] + currentGame[2][2] + 1 === 3)) {
+        bestPlay.push(1, 1);
+      }
+      if ((currentGame[1][1] + currentGame[2][2] - 1 === -3) ||
+      (currentGame[1][1] + currentGame[2][2] + 1 === 3)) {
+        bestPlay.push(0, 0);
+      }
+    }
+
+    //  for (let index = 0; index < 3; index += 1) {
+    //    let possiblePlay = currentGame[index][0] + currentGame[index][1] + currentGame[index][2];
+
+    //    if (possiblePlay === -2) {
+    //      for (let jIndex = 0; jIndex < 3; jIndex += 1) {
+
+    //      }
+    //      bestPlay.push();
+    //    } if (possiblePlay === 2) {
+    //      bestPlay.push();
+    //    }
+
+    //    possiblePlay = currentGame[0][index] + currentGame[1][index] + currentGame[2][index];
+
+    //    if (possiblePlay === -2) {
+    //      return 1;
+    //    } if (possiblePlay === 2) {
+    //      return -1;
+    //    }
+    //  }
+    if (!bestPlay.length) {
+      do {
+        i = Math.floor(Math.random() * Math.floor(3));
+        j = Math.floor(Math.random() * Math.floor(3));
+      } while (currentGame[i][j] !== 0);
+    }
+
+    if (bestPlay.length) {
+      nextBoard[bestPlay[0]][bestPlay[1]] = -1;
+      setBoard(nextBoard);
+    } else {
       nextBoard[i][j] = -1;
       setBoard(nextBoard);
     }
