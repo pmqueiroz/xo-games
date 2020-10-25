@@ -10,6 +10,14 @@
 [![Apk Download][apk-badge]][apk-url]
 [![License][license-badge]][license-url]
 
+<br>
+<br>
+<br>
+
+<!-- <img src="https://raw.githubusercontent.com/pmqueiroz/xo-games/master/.github/mockup1.png" width="200px" align="left"/> -->
+
+<img src="https://raw.githubusercontent.com/pmqueiroz/xo-games/master/.github/mockup2.png" width="200px" align="right"/>
+
 </div>
 
 ## Conteúdo
