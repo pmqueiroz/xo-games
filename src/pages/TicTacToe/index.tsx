@@ -20,9 +20,9 @@ import {
   Title,
   Separator,
   PlayerNameInput,
-  Button,
-  ButtonText,
 } from './styles';
+
+import Button from '../../Components/Button';
 
 import XImg from '../../images/X.png';
 import OImg from '../../images/O.png';
@@ -424,32 +424,39 @@ export default function TicTacToe() {
               />
             </LinearGradient>
             <Separator />
-            <Button onPress={resetGame}>
-              <ButtonText>Reset Game</ButtonText>
+            <Button
+              onPress={resetGame}
+              backgroundColor="#3879F9"
+              textColor="#FFF"
+            >
+              Reset Game
             </Button>
-            <Button onPress={handleGoToMenu}>
-              <ButtonText>Menu</ButtonText>
+            <Button
+              onPress={handleGoToMenu}
+              backgroundColor="#3879F9"
+              textColor="#FFF"
+            >
+              Menu
             </Button>
             <Button
               onPress={() => {
                 setPlayingVsAI(!playingVsAI);
                 resetGame();
-
                 setModalVisible(!modalVisible);
               }}
+              backgroundColor="#3879F9"
+              textColor="#FFF"
             >
-              <ButtonText>
-                {playingVsAI ? 'Play PvP' : 'Play vs IA'}
-              </ButtonText>
+              {playingVsAI ? 'Play PvP' : 'Play vs IA'}
             </Button>
-            <Button // white button
+            <Button
               onPress={() => {
                 setModalVisible(!modalVisible);
               }}
+              backgroundColor="#FFF"
+              textColor="#000"
             >
-              <ButtonText>
-                Continue
-              </ButtonText>
+              Continue
             </Button>
           </ModalView>
         </ModalContainer>

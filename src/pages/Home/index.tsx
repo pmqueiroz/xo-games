@@ -7,9 +7,10 @@ import {
   Logo,
   Title,
   ButtonContainer,
-  Button,
-  ButtonText,
 } from './styles';
+
+import Button from '../../Components/Button';
+
 import logoImg from '../../images/Logo.png';
 
 export default function Home() {
@@ -31,11 +32,19 @@ export default function Home() {
       />
       <Title>Select the game you wanna play</Title>
       <ButtonContainer>
-        <Button onPress={handleNavigateToTicTacToe}>
-          <ButtonText>Tic Tac Toe</ButtonText>
+        <Button
+          onPress={handleNavigateToTicTacToe}
+          backgroundColor="#3879F9"
+          textColor="#FFF"
+        >
+          Tic Tac Toe
         </Button>
-        <Button onPress={handleNavigateToHangmanGame}>
-          <ButtonText>Hangman</ButtonText>
+        <Button
+          onPress={handleNavigateToHangmanGame}
+          backgroundColor="#3879F9"
+          textColor="#FFF"
+        >
+          Hangman
         </Button>
       </ButtonContainer>
       <StatusBar />
