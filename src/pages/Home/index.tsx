@@ -13,7 +13,7 @@ import Button from '../../Components/Button';
 
 import logoImg from '../../images/Logo.png';
 
-export default function Home() {
+const Home: React.FC = () => {
   const navigation = useNavigation();
 
   function handleNavigateToTicTacToe() {
@@ -50,4 +50,6 @@ export default function Home() {
       <StatusBar />
     </Container>
   );
-}
+};
+
+export default Home;

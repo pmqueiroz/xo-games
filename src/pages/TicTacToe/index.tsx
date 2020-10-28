@@ -175,8 +175,8 @@ const TicTacToe: React.FC = () => {
     const currentGame = board;
     const nextBoard = board.slice();
 
-    let i;
-    let j;
+    let i = 0;
+    let j = 0;
 
     const bestPlay:number[] = [];
 
@@ -213,26 +213,6 @@ const TicTacToe: React.FC = () => {
       }
     }
 
-    //  for (let index = 0; index < 3; index += 1) {
-    //    let possiblePlay = currentGame[index][0] + currentGame[index][1] + currentGame[index][2];
-
-    //    if (possiblePlay === -2) {
-    //      for (let jIndex = 0; jIndex < 3; jIndex += 1) {
-
-    //      }
-    //      bestPlay.push();
-    //    } if (possiblePlay === 2) {
-    //      bestPlay.push();
-    //    }
-
-    //    possiblePlay = currentGame[0][index] + currentGame[1][index] + currentGame[2][index];
-
-    //    if (possiblePlay === -2) {
-    //      return 1;
-    //    } if (possiblePlay === 2) {
-    //      return -1;
-    //    }
-    //  }
     if (!bestPlay.length) {
       do {
         i = Math.floor(Math.random() * Math.floor(3));
