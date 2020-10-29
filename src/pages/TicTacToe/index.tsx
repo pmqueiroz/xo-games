@@ -20,6 +20,8 @@ import {
   Title,
   Separator,
   PlayerNameInput,
+  PlayerOneText,
+  PlayerTwoText,
 } from './styles';
 
 import Button from '../../Components/Button';
@@ -256,9 +258,9 @@ const TicTacToe: React.FC = () => {
   return (
     <Container>
       <Scoreboard>
-        <ScoreboardText>
+        <PlayerOneText active={currentPlayer === 1}>
           {playerXName}
-        </ScoreboardText>
+        </PlayerOneText>
         <Score>
           <ScoreboardText>
             {scoreboard[0]}
@@ -268,9 +270,9 @@ const TicTacToe: React.FC = () => {
             {scoreboard[1]}
           </ScoreboardText>
         </Score>
-        <ScoreboardText>
+        <PlayerTwoText active={currentPlayer === -1}>
           {playingVsAI ? 'AI' : playerOName}
-        </ScoreboardText>
+        </PlayerTwoText>
       </Scoreboard>
 
       <Canvas>

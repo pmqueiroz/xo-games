@@ -1,7 +1,11 @@
 import { Dimensions } from 'react-native';
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 
 const windowWidth = Dimensions.get('window').width;
+
+interface PlayerTextProps {
+   active: boolean;
+}
 
 export const Container = styled.View`
    background-color: #F7F9F8;
@@ -25,6 +29,34 @@ export const ScoreboardText = styled.Text`
    font-size: 20px;
    flex: 1;
    text-align: center;
+`;
+
+export const PlayerOneText = styled.Text<PlayerTextProps>`
+   font-weight: 500;
+   color: #3E5A82;
+   font-family: 'Roboto_500Medium';
+   font-size: 20px;
+   flex: 1;
+   text-align: center;
+
+   ${(props) => props.active &&
+      css`
+         color: #3879F9;
+      `}
+`;
+
+export const PlayerTwoText = styled.Text<PlayerTextProps>`
+   font-weight: 500;
+   color: #3E5A82;
+   font-family: 'Roboto_500Medium';
+   font-size: 20px;
+   flex: 1;
+   text-align: center;
+
+   ${(props) => props.active &&
+      css`
+         color: #F69143;
+      `}
 `;
 
 export const Score = styled.View`
