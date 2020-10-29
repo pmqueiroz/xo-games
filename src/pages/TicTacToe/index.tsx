@@ -183,6 +183,26 @@ const TicTacToe: React.FC = () => {
     const mainDiagonal = currentGame[0][0] + currentGame[1][1] + currentGame[2][2];
     const coDiagonal = currentGame[0][2] + currentGame[1][1] + currentGame[2][0];
 
+    for (let index = 0; index < 3; index += 1) {
+      const checkLine = currentGame[index][0] + currentGame[index][1] + currentGame[index][2];
+      const checkColum = currentGame[0][index] + currentGame[1][index] + currentGame[2][index];
+
+      if (checkLine === 2 || checkLine === -2) {
+        for (let jIndex = 0; jIndex < 3; jIndex += 1) {
+          if (currentGame[index][jIndex] === 0) {
+            bestPlay.push(index, jIndex);
+          }
+        }
+      }
+      if (checkColum === 2 || checkColum === -2) {
+        for (let jIndex = 0; jIndex < 3; jIndex += 1) {
+          if (currentGame[jIndex][index] === 0) {
+            bestPlay.push(jIndex, index);
+          }
+        }
+      }
+    }
+
     if ((coDiagonal === -2) || (coDiagonal === 2)) {
       if ((currentGame[1][1] + currentGame[2][0] - 1 === -3) ||
       (currentGame[1][1] + currentGame[2][0] + 1 === 3)) {
