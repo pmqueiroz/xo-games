@@ -21,7 +21,7 @@ const Home: React.FC = () => {
   }
 
   function handleNavigateToHangmanGame() {
-    // navigation.navigate('HangmanGame');
+    navigation.navigate('HMMenu');
   }
 
   return (
