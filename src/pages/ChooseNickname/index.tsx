@@ -1,5 +1,6 @@
 import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
 
 import XPlayer from '../../images/X.png';
 import OPlayer from '../../images/O.png';
@@ -10,8 +11,10 @@ import {
 } from './styles';
 
 const ChooseNickname: React.FC = () => {
-  function handleContinueToHangmanGame() {
-    // certo
+  const navigation = useNavigation();
+
+  function handleContinueToGame() {
+    navigation.navigate('TicTacToe');
   }
   return (
     <Container>
@@ -59,7 +62,7 @@ const ChooseNickname: React.FC = () => {
       </LinearGradient>
 
       <Button
-        onPress={handleContinueToHangmanGame}
+        onPress={handleContinueToGame}
         backgroundColor="#FFF"
         textColor="#000"
       >

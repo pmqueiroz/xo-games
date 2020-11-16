@@ -18,7 +18,7 @@ const Home: React.FC = () => {
 
   function handleNavigateToGame(AIEnable: boolean) {
     console.log(AIEnable);
-    navigation.navigate('TicTacToe');
+    navigation.navigate('ChooseNickname');
   }
 
   return (

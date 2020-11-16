@@ -12,9 +12,9 @@ export default function Routes() {
   return (
     <NavigationContainer>
       <Navigator screenOptions={{ headerShown: false }}>
-        <Screen name="ChooseNickname" component={ChooseNickname} />
         <Screen name="Home" component={Home} />
         <Screen name="TicTacToe" component={TicTacToe} />
+        <Screen name="ChooseNickname" component={ChooseNickname} />
         {/* <Screen name="HMMenu" component={HMMenu} />
         <Screen name="HMRanking" component={HMRanking} /> */}
       </Navigator>
