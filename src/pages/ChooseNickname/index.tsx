@@ -2,6 +2,7 @@ import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
+import { Route } from 'react-native';
 import XPlayer from '../../images/X.png';
 import OPlayer from '../../images/O.png';
 
@@ -10,18 +11,16 @@ import {
   Container, Title, ControlImg, PlayerNameInput,
 } from './styles';
 
-const AIEnable = false;
-
-const ChooseNickname: React.FC = () => {
+const ChooseNickname: React.FC = ({ route }: Route) => {
+  const { AIEnable } = route.params;
   const navigation = useNavigation();
 
   function handleContinueToGame(difficulty: number) {
-    console.log(difficulty);
     //   0 = off
     //   1 = easy
     //   2 = medium
     //   3 = hard
-    navigation.navigate('TicTacToe');
+    navigation.navigate('TicTacToe', { difficulty });
   }
 
   function AIDifficultSelection() {
@@ -90,7 +89,10 @@ const ChooseNickname: React.FC = () => {
 
   return (
     <Container>
-      <Title>Choose your nicknames</Title>
+      <Title>
+        Choose your nickname
+        {!AIEnable ? 's' : ''}
+      </Title>
       <ControlImg source={XPlayer} />
       <LinearGradient
         start={[0, 0.5]}

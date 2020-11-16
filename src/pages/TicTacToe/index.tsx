@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { Route, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
@@ -30,8 +30,10 @@ import XImg from '../../images/X.png';
 import OImg from '../../images/O.png';
 import CogImg from '../../images/Cog.png';
 
-const TicTacToe: React.FC = () => {
+const TicTacToe: React.FC = ({ route }: Route) => {
   const navigation = useNavigation();
+
+  const { difficulty } = route.params;
 
   function handleGoToMenu() {
     resetGame();
@@ -51,7 +53,7 @@ const TicTacToe: React.FC = () => {
     [0, 0, 0],
   ];
 
-  const [playingVsAI, setPlayingVsAI] = useState(false);
+  const [playingVsAI, setPlayingVsAI] = useState(difficulty);
   const [currentPlayer, setCurrentPlayer] = useState(1);
   const [board, setBoard] = useState(initialBoardState);
   const [modalVisible, setModalVisible] = useState(false);
@@ -118,7 +120,7 @@ const TicTacToe: React.FC = () => {
     if (playingVsAI) {
       setCurrentPlayer(-1);
       delay(500).then(() => {
-        AIPlay();
+        AIPlay(difficulty);
       });
     } else {
       const player = currentPlayer === 1 ? -1 : 1;
@@ -173,7 +175,7 @@ const TicTacToe: React.FC = () => {
     return 0;
   }
 
-  function AIPlay() {
+  function AIPlay(gameMode: number) {
     const currentGame = board;
     const nextBoard = board.slice();
 
@@ -182,56 +184,60 @@ const TicTacToe: React.FC = () => {
 
     const bestPlay:number[] = [];
 
-    const mainDiagonal = currentGame[0][0] + currentGame[1][1] + currentGame[2][2];
-    const coDiagonal = currentGame[0][2] + currentGame[1][1] + currentGame[2][0];
+    if (gameMode !== 1) {
+      const mainDiagonal = currentGame[0][0] + currentGame[1][1] + currentGame[2][2];
+      const coDiagonal = currentGame[0][2] + currentGame[1][1] + currentGame[2][0];
 
-    for (let index = 0; index < 3; index += 1) {
-      const checkLine = currentGame[index][0] + currentGame[index][1] + currentGame[index][2];
-      const checkColum = currentGame[0][index] + currentGame[1][index] + currentGame[2][index];
+      if (gameMode !== 2) {
+        if ((coDiagonal === -2) || (coDiagonal === 2)) {
+          if ((currentGame[1][1] + currentGame[2][0] - 1 === -3) ||
+        (currentGame[1][1] + currentGame[2][0] + 1 === 3)) {
+            bestPlay.push(0, 2);
+          }
+          if ((currentGame[0][2] + currentGame[2][0] - 1 === -3) ||
+        (currentGame[0][2] + currentGame[2][0] + 1 === 3)) {
+            bestPlay.push(1, 1);
+          }
+          if ((currentGame[0][2] + currentGame[1][1] - 1 === -3) ||
+        (currentGame[0][2] + currentGame[1][1] + 1 === 3)) {
+            bestPlay.push(2, 0);
+          }
+        }
 
-      if (checkLine === 2 || checkLine === -2) {
-        for (let jIndex = 0; jIndex < 3; jIndex += 1) {
-          if (currentGame[index][jIndex] === 0) {
-            bestPlay.push(index, jIndex);
+        if ((mainDiagonal === -2) || (mainDiagonal === 2)) {
+          if ((currentGame[0][0] + currentGame[1][1] - 1 === -3) ||
+        (currentGame[0][0] + currentGame[1][1] + 1 === 3)) {
+            bestPlay.push(2, 2);
+          }
+          if ((currentGame[0][0] + currentGame[2][2] - 1 === -3) ||
+        (currentGame[0][0] + currentGame[2][2] + 1 === 3)) {
+            bestPlay.push(1, 1);
+          }
+          if ((currentGame[1][1] + currentGame[2][2] - 1 === -3) ||
+        (currentGame[1][1] + currentGame[2][2] + 1 === 3)) {
+            bestPlay.push(0, 0);
           }
         }
       }
-      if (checkColum === 2 || checkColum === -2) {
-        for (let jIndex = 0; jIndex < 3; jIndex += 1) {
-          if (currentGame[jIndex][index] === 0) {
-            bestPlay.push(jIndex, index);
+
+      for (let index = 0; index < 3; index += 1) {
+        const checkLine = currentGame[index][0] + currentGame[index][1] + currentGame[index][2];
+        const checkColum = currentGame[0][index] + currentGame[1][index] + currentGame[2][index];
+
+        if (checkLine === 2 || checkLine === -2) {
+          for (let jIndex = 0; jIndex < 3; jIndex += 1) {
+            if (currentGame[index][jIndex] === 0) {
+              bestPlay.push(index, jIndex);
+            }
           }
         }
-      }
-    }
-
-    if ((coDiagonal === -2) || (coDiagonal === 2)) {
-      if ((currentGame[1][1] + currentGame[2][0] - 1 === -3) ||
-      (currentGame[1][1] + currentGame[2][0] + 1 === 3)) {
-        bestPlay.push(0, 2);
-      }
-      if ((currentGame[0][2] + currentGame[2][0] - 1 === -3) ||
-      (currentGame[0][2] + currentGame[2][0] + 1 === 3)) {
-        bestPlay.push(1, 1);
-      }
-      if ((currentGame[0][2] + currentGame[1][1] - 1 === -3) ||
-      (currentGame[0][2] + currentGame[1][1] + 1 === 3)) {
-        bestPlay.push(2, 0);
-      }
-    }
-
-    if ((mainDiagonal === -2) || (mainDiagonal === 2)) {
-      if ((currentGame[0][0] + currentGame[1][1] - 1 === -3) ||
-      (currentGame[0][0] + currentGame[1][1] + 1 === 3)) {
-        bestPlay.push(2, 2);
-      }
-      if ((currentGame[0][0] + currentGame[2][2] - 1 === -3) ||
-      (currentGame[0][0] + currentGame[2][2] + 1 === 3)) {
-        bestPlay.push(1, 1);
-      }
-      if ((currentGame[1][1] + currentGame[2][2] - 1 === -3) ||
-      (currentGame[1][1] + currentGame[2][2] + 1 === 3)) {
-        bestPlay.push(0, 0);
+        if (checkColum === 2 || checkColum === -2) {
+          for (let jIndex = 0; jIndex < 3; jIndex += 1) {
+            if (currentGame[jIndex][index] === 0) {
+              bestPlay.push(jIndex, index);
+            }
+          }
+        }
       }
     }
 
@@ -271,7 +277,8 @@ const TicTacToe: React.FC = () => {
           </ScoreboardText>
         </Score>
         <PlayerTwoText active={currentPlayer === -1}>
-          {playingVsAI ? 'AI' : playerOName}
+          {/* eslint-disable-next-line no-nested-ternary */}
+          {playingVsAI ? playingVsAI === 1 ? 'Easy AI' : playingVsAI === 2 ? 'Medium AI' : 'Hard AI' : playerOName}
         </PlayerTwoText>
       </Scoreboard>
 
