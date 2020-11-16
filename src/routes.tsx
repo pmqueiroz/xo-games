@@ -16,9 +16,9 @@ export default function Routes() {
       <Navigator screenOptions={{ headerShown: false }}>
         <Screen name="Home" component={Home} />
         <Screen name="TicTacToe" component={TicTacToe} />
-        <Screen name="HMMenu" component={HMMenu} />
+        {/* <Screen name="HMMenu" component={HMMenu} />
         <Screen name="HMChooseNickname" component={HMChooseNickname} />
-        <Screen name="HMRanking" component={HMRanking} />
+        <Screen name="HMRanking" component={HMRanking} /> */}
       </Navigator>
     </NavigationContainer>
   );

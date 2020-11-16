@@ -16,12 +16,9 @@ import logoImg from '../../images/Logo.png';
 const Home: React.FC = () => {
   const navigation = useNavigation();
 
-  function handleNavigateToTicTacToe() {
+  function handleNavigateToGame(AIEnable: boolean) {
+    console.log(AIEnable);
     navigation.navigate('TicTacToe');
-  }
-
-  function handleNavigateToHangmanGame() {
-    navigation.navigate('HMMenu');
   }
 
   return (
@@ -30,21 +27,21 @@ const Home: React.FC = () => {
         source={logoImg}
         resizeMode="contain"
       />
-      <Title>Select the game you wanna play</Title>
+      <Title>Choose your game mode</Title>
       <ButtonContainer>
         <Button
-          onPress={handleNavigateToTicTacToe}
+          onPress={() => handleNavigateToGame(true)}
           backgroundColor="#3879F9"
           textColor="#FFF"
         >
-          Tic Tac Toe
+          With AI
         </Button>
         <Button
-          onPress={handleNavigateToHangmanGame}
+          onPress={() => handleNavigateToGame(false)}
           backgroundColor="#3879F9"
           textColor="#FFF"
         >
-          Hangman
+          With a friend
         </Button>
       </ButtonContainer>
       <StatusBar />
