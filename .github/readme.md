@@ -3,7 +3,7 @@
 <img width="250px" align="center" src="https://raw.githubusercontent.com/pmqueiroz/dsdm-trab/master/.github/logo.svg"></img>
 
 <p align="center">
-    Trabalho da matéria de Desenvolvimento de Sistemas para Dispositivos Móveis, aplicativo para <i>Android</i> contendo mini games
+    Trabalho da matéria de Desenvolvimento de Sistemas para Dispositivos Móveis,um jogo da velha para <i>Android</i> com Inteligência Artificial
 </p>
 
 ![Status][status-badge]
@@ -23,11 +23,11 @@
 ## Conteúdo
 * [Começando](#Começando-)
 * [Features](#Features-)
-    * [Tic Tac Toe](#TicTacToe)
-    * [Hangman Game](#Hangman-Game)
 * [Issues](#Issues-)
 * [Contribuindo](#Contribuindo-)
+* [Créditos](#Créditos-)
 * [License](#License-)
+
 ## Começando 🚀
 #### Requisitos
 
@@ -54,9 +54,9 @@ $ git clone https://github.com/pmqueiroz/xo-games.git xo-games
 $ cd {path to your clone}
 
 # Instalando as dependencias
-# Usando Yarn (nao seja boi de usar npm)
+# Usando Yarn
 $ yarn
-# Usando npm
+# Usando npm (NO, PLEASE NO)
 $ npm i
 
 # Rodando a aplicação
@@ -65,8 +65,12 @@ $ expo start
 se você tem dúvidas sobre como rodar o projeto usando expo consulte sua [documentação](https://docs.expo.io)
 
 ## Features 🎮
-### TicTacToe
-### Hangman Game
+* Modo de Jogo 1v1
+* Modo de Jogo Contra Computador
+* Níveis de Dificuldade Contra Computador (Fácil, Médio, Díficil)
+* Escolha dos Apelidos Para Jogadores
+* E o App é Fofinho :) (isso conta muito acredite em mim)
+
 ## Issues 🐛
 Caso encontre algum problema em nossa aplicação considere nos alertar na [Sessão de Erros][issues-url].
 ## Contribuindo 🤝
@@ -94,8 +98,10 @@ $ git push origin {branch-name}
 
 # Faça um pull request do seu repositório
 ```
+## Créditos ❤
+O layout desse projeto foi inspirado em um design feito por [Alexandru Dranga][alex-dribbble] disponível no site [Dribbble][ttt-dribbble]
 
-### License 📝
+## License 📝
 This project is under the MIT license. See the [LICENSE][license-url] for more information.
 
 [status-badge]: https://img.shields.io/badge/status-building-important?logo=tool
@@ -110,3 +116,5 @@ This project is under the MIT license. See the [LICENSE][license-url] for more i
 [yarn-url]: https://classic.yarnpkg.com/
 [npm-url]:  https://www.npmjs.com/
 [expo-url]: https://expo.io/
+[alex-dribbble]: https://dribbble.com/DpAlex
+[ttt-dribbble]: https://dribbble.com/shots/4239811-Tic-Tac-Toe
