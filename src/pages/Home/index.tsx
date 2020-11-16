@@ -41,7 +41,7 @@ const Home: React.FC = () => {
           backgroundColor="#3879F9"
           textColor="#FFF"
         >
-          With a friend
+          With a Friend
         </Button>
       </ButtonContainer>
       <StatusBar />
