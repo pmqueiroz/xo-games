@@ -33,7 +33,7 @@ import CogImg from '../../images/Cog.png';
 const TicTacToe: React.FC = ({ route }: Route) => {
   const navigation = useNavigation();
 
-  const { difficulty } = route.params;
+  const { difficulty, playerXName, playerOName } = route.params;
 
   function handleGoToMenu() {
     resetGame();
@@ -58,8 +58,8 @@ const TicTacToe: React.FC = ({ route }: Route) => {
   const [board, setBoard] = useState(initialBoardState);
   const [modalVisible, setModalVisible] = useState(false);
   const [scoreboard, setScoreboard] = useState([0, 0]);
-  const [playerXName, setPlayerXName] = useState('Player X');
-  const [playerOName, setPlayerOName] = useState('Player O');
+  const [playerX, setPlayerX] = useState(playerXName);
+  const [playerO, setPlayerO] = useState(playerOName);
 
   const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
@@ -265,7 +265,7 @@ const TicTacToe: React.FC = ({ route }: Route) => {
     <Container>
       <Scoreboard>
         <PlayerOneText active={currentPlayer === 1}>
-          {playerXName}
+          {playerX}
         </PlayerOneText>
         <Score>
           <ScoreboardText>
@@ -278,7 +278,7 @@ const TicTacToe: React.FC = ({ route }: Route) => {
         </Score>
         <PlayerTwoText active={currentPlayer === -1}>
           {/* eslint-disable-next-line no-nested-ternary */}
-          {playingVsAI ? playingVsAI === 1 ? 'Easy AI' : playingVsAI === 2 ? 'Medium AI' : 'Hard AI' : playerOName}
+          {playingVsAI ? playingVsAI === 1 ? 'Easy AI' : playingVsAI === 2 ? 'Medium AI' : 'Hard AI' : playerO}
         </PlayerTwoText>
       </Scoreboard>
 
@@ -408,7 +408,7 @@ const TicTacToe: React.FC = ({ route }: Route) => {
             >
               <PlayerNameInput
                 placeholder="Player X"
-                onChangeText={(text: string) => setPlayerXName(text)}
+                onChangeText={(text: string) => setPlayerX(text)}
                 maxLength={10}
               />
             </LinearGradient>
@@ -428,7 +428,7 @@ const TicTacToe: React.FC = ({ route }: Route) => {
               <PlayerNameInput
                 editable={!playingVsAI}
                 placeholder="Player O"
-                onChangeText={(text: string) => setPlayerOName(text)}
+                onChangeText={(text: string) => setPlayerO(text)}
                 maxLength={10}
               />
             </LinearGradient>
@@ -446,17 +446,6 @@ const TicTacToe: React.FC = ({ route }: Route) => {
               textColor="#FFF"
             >
               Menu
-            </Button>
-            <Button
-              onPress={() => {
-                setPlayingVsAI(!playingVsAI);
-                resetGame();
-                setModalVisible(!modalVisible);
-              }}
-              backgroundColor="#3879F9"
-              textColor="#FFF"
-            >
-              {playingVsAI ? 'Play PvP' : 'Play vs IA'}
             </Button>
             <Button
               onPress={() => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
@@ -12,15 +12,17 @@ import {
 } from './styles';
 
 const ChooseNickname: React.FC = ({ route }: Route) => {
-  const { AIEnable } = route.params;
+  const [playerXName, setPlayerXName] = useState('Player X');
+  const [playerOName, setPlayerOName] = useState('Player O');
   const navigation = useNavigation();
+  const { AIEnable } = route.params;
 
   function handleContinueToGame(difficulty: number) {
     //   0 = off
     //   1 = easy
     //   2 = medium
     //   3 = hard
-    navigation.navigate('TicTacToe', { difficulty });
+    navigation.navigate('TicTacToe', { difficulty, playerXName, playerOName });
   }
 
   function AIDifficultSelection() {
@@ -52,46 +54,11 @@ const ChooseNickname: React.FC = ({ route }: Route) => {
     );
   }
 
-  function PlayerTwoChooseNickName() {
-    return (
-      <>
-        <ControlImg source={OPlayer} />
-        <LinearGradient
-          start={[0, 0.5]}
-          end={[1, 0.5]}
-          colors={['#F77634', '#F1D06E']}
-          style={{
-            marginVertical: 15,
-            width: '75%',
-            height: 45,
-            borderRadius: 50,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <PlayerNameInput
-            placeholder="Player 2"
-        // onChangeText={(text: string) => setPlayerXName(text)}
-            maxLength={10}
-          />
-        </LinearGradient>
-
-        <Button
-          onPress={() => handleContinueToGame(0)}
-          backgroundColor="#FFF"
-          textColor="#000"
-        >
-          Continue
-        </Button>
-      </>
-    );
-  }
-
   return (
     <Container>
       <Title>
         Choose your nickname
-        {!AIEnable ? 's' : ''}
+        {!AIEnable ? 's' : null}
       </Title>
       <ControlImg source={XPlayer} />
       <LinearGradient
@@ -109,14 +76,45 @@ const ChooseNickname: React.FC = ({ route }: Route) => {
       >
         <PlayerNameInput
           placeholder="Player 1"
-      // onChangeText={(text: string) => setPlayerXName(text)}
+          onChangeText={(text: string) => setPlayerXName(text)}
           maxLength={10}
         />
       </LinearGradient>
 
       {AIEnable
         ? <AIDifficultSelection />
-        : <PlayerTwoChooseNickName />}
+        : (
+          <>
+            <ControlImg source={OPlayer} />
+            <LinearGradient
+              start={[0, 0.5]}
+              end={[1, 0.5]}
+              colors={['#F77634', '#F1D06E']}
+              style={{
+                marginVertical: 15,
+                width: '75%',
+                height: 45,
+                borderRadius: 50,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <PlayerNameInput
+                placeholder="Player 2"
+                onChangeText={(text: string) => setPlayerOName(text)}
+                maxLength={10}
+              />
+            </LinearGradient>
+
+            <Button
+              onPress={() => handleContinueToGame(0)}
+              backgroundColor="#FFF"
+              textColor="#000"
+            >
+              Continue
+            </Button>
+          </>
+        )}
     </Container>
   );
 };
