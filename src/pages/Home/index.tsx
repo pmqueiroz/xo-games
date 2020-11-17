@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useNavigation } from '@react-navigation/native';
 
@@ -7,17 +8,24 @@ import {
   Logo,
   Title,
   ButtonContainer,
+  HistoryBtn,
+  HistoryIcon,
 } from './styles';
 
 import Button from '../../Components/Button';
 
 import logoImg from '../../images/Logo.png';
+import historyImg from '../../images/history.png';
 
 const Home: React.FC = () => {
   const navigation = useNavigation();
 
   function handleNavigateToGame(AIEnable: boolean) {
     navigation.navigate('ChooseNickname', { AIEnable });
+  }
+
+  function handleNavigateToHistory() {
+    navigation.navigate('History');
   }
 
   return (
@@ -42,6 +50,9 @@ const Home: React.FC = () => {
         >
           With a Friend
         </Button>
+        <HistoryBtn onPress={handleNavigateToHistory}>
+          <HistoryIcon source={historyImg} resizeMode="contain" />
+        </HistoryBtn>
       </ButtonContainer>
       <StatusBar />
     </Container>

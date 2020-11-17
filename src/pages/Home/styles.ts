@@ -24,6 +24,8 @@ export const Title = styled.Text`
 
 export const ButtonContainer = styled.View`
    margin-top: 40px;
+   justify-content: center;
+   align-items: center;
 `;
 
 export const Button = styled.TouchableOpacity`
@@ -45,4 +47,19 @@ export const ButtonText = styled.Text`
    color: #FFF;
    font-family: 'Roboto_400Regular';
    font-size: 15px;
+`;
+
+export const HistoryBtn = styled.TouchableOpacity`
+   margin-top: 20px;
+   background-color: #FFFFFF;
+   width: 50px;
+   height: 50px;
+   border-Radius: 25px;
+   justify-content: center;
+   align-items: center;
+   elevation: 5;
+`;
+export const HistoryIcon = styled.Image`
+   width: 35px;
+   height: 35px;
 `;
