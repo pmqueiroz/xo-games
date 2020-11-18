@@ -40,7 +40,7 @@ const alo = [
 const History: React.FC = () => {
   const [matches, setMatches] = useState<Matches[]>(() => {
     const storedMatches = localStorage.getItem(
-      '@XOGames:matches',
+      '@XoGames:matches',
     );
 
     if (storedMatches) {
@@ -50,18 +50,12 @@ const History: React.FC = () => {
     return [];
   });
 
-  useEffect(() => {
-    localStorage.setItem(
-      '@XoGames:matches',
-      JSON.stringify(matches),
-    );
-  }, [matches]);
-
   const navigation = useNavigation();
 
   function handleBackToMenu() {
     navigation.navigate('Home');
   }
+  console.log(matches);
 
   return (
     <Container>
@@ -74,7 +68,7 @@ const History: React.FC = () => {
           alignItems: 'center',
         }}
       >
-        {alo.map((match) => (
+        {matches.map((match) => (
           <LinearGradient
             start={[0, 0.5]}
             end={[1, 0.5]}

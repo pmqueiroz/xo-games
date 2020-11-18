@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
@@ -30,7 +30,33 @@ import XImg from '../../images/X.png';
 import OImg from '../../images/O.png';
 import CogImg from '../../images/Cog.png';
 
+interface Matches {
+   PlayerXName: string;
+   PlayerOName: string;
+   PLayerXScore: number;
+   PLayerOScore: number;
+}
+
 const TicTacToe: React.FC = ({ route }: Route) => {
+  const [matches, setMatches] = useState<Matches[]>(() => {
+    const storedMatches = localStorage.getItem(
+      '@XoGames:matches',
+    );
+
+    if (storedMatches) {
+      return JSON.parse(storedMatches);
+    }
+
+    return [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem(
+      '@XoGames:matches',
+      JSON.stringify(matches),
+    );
+  }, [matches]);
+
   const navigation = useNavigation();
 
   const { difficulty, playerXName, playerOName } = route.params;
@@ -38,13 +64,6 @@ const TicTacToe: React.FC = ({ route }: Route) => {
   function handleGoToMenu() {
     resetGame();
     navigation.navigate('Home');
-  }
-
-  function resetGame() {
-    setModalVisible(false);
-    setBoard(initialBoardState);
-    setCurrentPlayer(1);
-    setScoreboard([0, 0]);
   }
 
   const initialBoardState = [
@@ -60,6 +79,21 @@ const TicTacToe: React.FC = ({ route }: Route) => {
   const [scoreboard, setScoreboard] = useState([0, 0]);
   const [playerX, setPlayerX] = useState(playerXName);
   const [playerO, setPlayerO] = useState(playerOName);
+
+  function resetGame() {
+    const match = {
+      PlayerXName: playerXName,
+      PlayerOName: playerOName,
+      PLayerXScore: scoreboard[0],
+      PLayerOScore: scoreboard[1],
+    };
+
+    setMatches([...matches, match]);
+    setModalVisible(false);
+    setBoard(initialBoardState);
+    setCurrentPlayer(1);
+    setScoreboard([0, 0]);
+  }
 
   const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
