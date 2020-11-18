@@ -38,24 +38,24 @@ interface Matches {
 }
 
 const TicTacToe: React.FC = ({ route }: Route) => {
-  const [matches, setMatches] = useState<Matches[]>(() => {
-    const storedMatches = localStorage.getItem(
-      '@XoGames:matches',
-    );
+//   const [matches, setMatches] = useState<Matches[]>(() => {
+//     const storedMatches = localStorage.getItem(
+//       '@XoGames:matches',
+//     );
 
-    if (storedMatches) {
-      return JSON.parse(storedMatches);
-    }
+  //     if (storedMatches) {
+  //       return JSON.parse(storedMatches);
+  //     }
 
-    return [];
-  });
+  //     return [];
+  //   });
 
-  useEffect(() => {
-    localStorage.setItem(
-      '@XoGames:matches',
-      JSON.stringify(matches),
-    );
-  }, [matches]);
+  //   useEffect(() => {
+  //     localStorage.setItem(
+  //       '@XoGames:matches',
+  //       JSON.stringify(matches),
+  //     );
+  //   }, [matches]);
 
   const navigation = useNavigation();
 
@@ -89,10 +89,9 @@ const TicTacToe: React.FC = ({ route }: Route) => {
       PLayerOScore: scoreboard[1],
     };
 
-    if (match.PLayerXScore + match.PLayerOScore !== 0) {
-      setMatches([...matches, match]);
-    }
-    console.log('a');
+    //  if (match.PLayerXScore + match.PLayerOScore !== 0) {
+    //    setMatches([...matches, match]);
+    //  }
     setModalVisible(false);
     setBoard(initialBoardState);
     setCurrentPlayer(1);
