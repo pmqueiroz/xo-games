@@ -11,6 +11,19 @@ export const MatchesContainer = styled.ScrollView`
    width: 100%;
    height: 100%;
 `;
+export const Header = styled.View`
+   width: 85%;
+   justify-content: center;
+   align-items: center;
+   flex-direction: row;
+   margin-bottom: 15px;
+`;
+export const DeleteImg = styled.Image`
+   width: 25px;
+   height: 25px;
+`;
+export const DeleteButton = styled.TouchableOpacity`
+`;
 
 export const MatchView = styled.View`
    background: #FFF;
@@ -47,7 +60,9 @@ export const Title = styled.Text`
    color: #3E5A82;
    font-family: 'Roboto_500Medium';
    font-size: 25px;
-   margin-bottom: 15px;
+   flex: 1;
+   text-align: center;
+   margin-left: 25px;
 `;
 
 export const PlayerOneText = styled.Text`

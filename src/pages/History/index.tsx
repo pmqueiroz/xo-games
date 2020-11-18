@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 import {
   Container,
@@ -11,9 +11,14 @@ import {
   PlayerTwoText,
   Score,
   ScoreboardText,
+  Header,
+  DeleteImg,
+  DeleteButton,
 } from './styles';
 
 import Button from '../../Components/Button';
+
+import deleteImg from '../../images/Trash.png';
 
 interface Matches {
    PlayerXName: string;
@@ -21,21 +26,6 @@ interface Matches {
    PLayerXScore: number;
    PLayerOScore: number;
 }
-
-const alo = [
-  {
-    PlayerXName: 'Cleiton',
-    PlayerOName: 'Claudio',
-    PLayerXScore: 1,
-    PLayerOScore: 3,
-  },
-  {
-    PlayerXName: 'Tutu',
-    PlayerOName: 'Ramon',
-    PLayerXScore: 3,
-    PLayerOScore: 8,
-  },
-];
 
 const History: React.FC = () => {
   const [matches, setMatches] = useState<Matches[]>(() => {
@@ -56,9 +46,32 @@ const History: React.FC = () => {
     navigation.navigate('Home');
   }
 
+  function handleDeleteHistory() {
+    localStorage.setItem(
+      '@XoGames:matches',
+      JSON.stringify(''),
+    );
+
+    setMatches([]);
+  }
+
+  useFocusEffect(() => {
+    const storedMatches = localStorage.getItem(
+      '@XoGames:matches',
+    );
+    if (storedMatches?.length) {
+      setMatches(JSON.parse(storedMatches));
+    }
+  });
+
   return (
     <Container>
-      <Title>History</Title>
+      <Header>
+        <Title>History</Title>
+        <DeleteButton onPress={handleDeleteHistory}>
+          <DeleteImg source={deleteImg} />
+        </DeleteButton>
+      </Header>
       <MatchesContainer
         contentContainerStyle={{
           paddingHorizontal: 16,
@@ -67,15 +80,16 @@ const History: React.FC = () => {
           alignItems: 'center',
         }}
       >
-        {matches.map((match) => {
+        {matches.length ? matches.map((match, id) => {
           let colorWinner;
+          const key = id;
 
           if (match.PLayerOScore > match.PLayerXScore) {
             colorWinner = ['#F77634', '#F1D06E'];
           } else if (match.PLayerOScore < match.PLayerXScore) {
             colorWinner = ['#3575F8', '#80D9DA'];
           } else {
-            colorWinner = ['#3575F8', '#F77634'];
+            colorWinner = ['#a3a3a3a3', '#a3a3a3a3'];
           }
 
           return (
@@ -91,6 +105,7 @@ const History: React.FC = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
+              key={key}
             >
               <MatchView>
                 <PlayerOneText>{match.PlayerXName}</PlayerOneText>
@@ -107,7 +122,7 @@ const History: React.FC = () => {
               </MatchView>
             </LinearGradient>
           );
-        })}
+        }) : null}
       </MatchesContainer>
       <Button
         onPress={() => handleBackToMenu()}
