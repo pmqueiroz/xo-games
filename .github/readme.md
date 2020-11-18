@@ -106,7 +106,7 @@ This project is under the MIT license. See the [LICENSE][license-url] for more i
 
 [status-badge]: https://img.shields.io/badge/status-building-important?logo=tool
 [apk-badge]: https://img.shields.io/badge/Apk-download-important?logo=android&color=%233575F8
-[apk-url]: https://github.com/pmqueiroz/xo-games/releases/download/v0.0.2/xo-games-0.0.2.apk
+[apk-url]: https://github.com/pmqueiroz/xo-games/releases/download/v0.0.3/xo-games-0.0.3.apk
 [license-badge]: https://img.shields.io/github/license/pmqueiroz/xo-games?color=%233575F8
 [license-url]: https://github.com/pmqueiroz/xo-games/blob/master/LICENSE
 [issues-url]: https://github.com/pmqueiroz/xo-games/issues
