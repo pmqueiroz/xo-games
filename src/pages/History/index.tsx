@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   Container,
@@ -11,6 +12,8 @@ import {
   Score,
   ScoreboardText,
 } from './styles';
+
+import Button from '../../Components/Button';
 
 interface Matches {
    PlayerXName: string;
@@ -54,39 +57,60 @@ const History: React.FC = () => {
     );
   }, [matches]);
 
+  const navigation = useNavigation();
+
+  function handleBackToMenu() {
+    navigation.navigate('Home');
+  }
+
   return (
     <Container>
       <Title>History</Title>
-      {alo.map((match) => (
-        <LinearGradient
-          start={[0, 0.5]}
-          end={[1, 0.5]}
-          colors={['#3575F8', '#80D9DA']}
-          style={{
-            marginVertical: 15,
-            width: '90%',
-            height: 80,
-            borderRadius: 13,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <MatchView>
-            <PlayerOneText>{match.PlayerXName}</PlayerOneText>
-            <Score>
-              <ScoreboardText>
-                {match.PLayerXScore}
-                {' '}
-                -
-                {' '}
-                {match.PLayerOScore}
-              </ScoreboardText>
-            </Score>
-            <PlayerTwoText>{match.PlayerOName}</PlayerTwoText>
-          </MatchView>
-        </LinearGradient>
-      ))}
-      <MatchesContainer />
+      <MatchesContainer
+        contentContainerStyle={{
+          paddingHorizontal: 16,
+          paddingBottom: 16,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        {alo.map((match) => (
+          <LinearGradient
+            start={[0, 0.5]}
+            end={[1, 0.5]}
+            colors={['#3575F8', '#80D9DA']}
+            style={{
+              marginVertical: 15,
+              width: '90%',
+              height: 80,
+              borderRadius: 13,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <MatchView>
+              <PlayerOneText>{match.PlayerXName}</PlayerOneText>
+              <Score>
+                <ScoreboardText>
+                  {match.PLayerXScore}
+                  {' '}
+                  -
+                  {' '}
+                  {match.PLayerOScore}
+                </ScoreboardText>
+              </Score>
+              <PlayerTwoText>{match.PlayerOName}</PlayerTwoText>
+            </MatchView>
+          </LinearGradient>
+        ))}
+      </MatchesContainer>
+      <Button
+        onPress={() => handleBackToMenu()}
+        backgroundColor="#3879F9"
+        textColor="#FFF"
+      >
+        Back
+      </Button>
     </Container>
   );
 };

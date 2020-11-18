@@ -4,7 +4,7 @@ export const Container = styled.View`
    flex: 1;
    height: 100%;
    align-items: center;
-   margin-top: 5%;
+   margin: 5% 0;
 `;
 export const MatchesContainer = styled.ScrollView`
    flex: 1;
