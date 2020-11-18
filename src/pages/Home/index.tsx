@@ -49,9 +49,9 @@ const Home: React.FC = () => {
         >
           With a Friend
         </Button>
-        <HistoryBtn onPress={handleNavigateToHistory}>
+        {/* <HistoryBtn onPress={handleNavigateToHistory}>
           <HistoryIcon source={historyImg} resizeMode="contain" />
-        </HistoryBtn>
+        </HistoryBtn> */}
       </ButtonContainer>
       <StatusBar />
     </Container>

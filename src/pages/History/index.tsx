@@ -55,13 +55,17 @@ const History: React.FC = () => {
     setMatches([]);
   }
 
-  useFocusEffect(() => {
+  function loadMatches() {
     const storedMatches = localStorage.getItem(
       '@XoGames:matches',
     );
     if (storedMatches?.length) {
       setMatches(JSON.parse(storedMatches));
     }
+  }
+
+  useFocusEffect(() => {
+    loadMatches();
   });
 
   return (
