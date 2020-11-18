@@ -55,7 +55,6 @@ const History: React.FC = () => {
   function handleBackToMenu() {
     navigation.navigate('Home');
   }
-  console.log(matches);
 
   return (
     <Container>
@@ -68,35 +67,47 @@ const History: React.FC = () => {
           alignItems: 'center',
         }}
       >
-        {matches.map((match) => (
-          <LinearGradient
-            start={[0, 0.5]}
-            end={[1, 0.5]}
-            colors={['#3575F8', '#80D9DA']}
-            style={{
-              marginVertical: 15,
-              width: '90%',
-              height: 80,
-              borderRadius: 13,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <MatchView>
-              <PlayerOneText>{match.PlayerXName}</PlayerOneText>
-              <Score>
-                <ScoreboardText>
-                  {match.PLayerXScore}
-                  {' '}
-                  -
-                  {' '}
-                  {match.PLayerOScore}
-                </ScoreboardText>
-              </Score>
-              <PlayerTwoText>{match.PlayerOName}</PlayerTwoText>
-            </MatchView>
-          </LinearGradient>
-        ))}
+        {matches.map((match) => {
+          let colorWinner;
+
+          if (match.PLayerOScore > match.PLayerXScore) {
+            colorWinner = ['#F77634', '#F1D06E'];
+          } else if (match.PLayerOScore < match.PLayerXScore) {
+            colorWinner = ['#3575F8', '#80D9DA'];
+          } else {
+            colorWinner = ['#3575F8', '#F77634'];
+          }
+
+          return (
+            <LinearGradient
+              start={[0, 0.5]}
+              end={[1, 0.5]}
+              colors={colorWinner}
+              style={{
+                marginVertical: 15,
+                width: '90%',
+                height: 80,
+                borderRadius: 13,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <MatchView>
+                <PlayerOneText>{match.PlayerXName}</PlayerOneText>
+                <Score>
+                  <ScoreboardText>
+                    {match.PLayerXScore}
+                    {' '}
+                    -
+                    {' '}
+                    {match.PLayerOScore}
+                  </ScoreboardText>
+                </Score>
+                <PlayerTwoText>{match.PlayerOName}</PlayerTwoText>
+              </MatchView>
+            </LinearGradient>
+          );
+        })}
       </MatchesContainer>
       <Button
         onPress={() => handleBackToMenu()}

@@ -61,8 +61,8 @@ const TicTacToe: React.FC = ({ route }: Route) => {
 
   const { difficulty, playerXName, playerOName } = route.params;
 
-  function handleGoToMenu() {
-    resetGame();
+  async function handleGoToMenu() {
+    await resetGame();
     navigation.navigate('Home');
   }
 
@@ -78,17 +78,21 @@ const TicTacToe: React.FC = ({ route }: Route) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [scoreboard, setScoreboard] = useState([0, 0]);
   const [playerX, setPlayerX] = useState(playerXName);
-  const [playerO, setPlayerO] = useState(playerOName);
+  /* eslint-disable-next-line no-nested-ternary */
+  const [playerO, setPlayerO] = useState(playingVsAI ? playingVsAI === 1 ? 'Easy AI' : playingVsAI === 2 ? 'Medium AI' : 'Hard AI' : playerOName);
 
   function resetGame() {
     const match = {
-      PlayerXName: playerXName,
-      PlayerOName: playerOName,
+      PlayerXName: playerX,
+      PlayerOName: playerO,
       PLayerXScore: scoreboard[0],
       PLayerOScore: scoreboard[1],
     };
 
-    setMatches([...matches, match]);
+    if (match.PLayerXScore + match.PLayerOScore !== 0) {
+      setMatches([...matches, match]);
+    }
+    console.log('a');
     setModalVisible(false);
     setBoard(initialBoardState);
     setCurrentPlayer(1);
@@ -311,8 +315,7 @@ const TicTacToe: React.FC = ({ route }: Route) => {
           </ScoreboardText>
         </Score>
         <PlayerTwoText active={currentPlayer === -1}>
-          {/* eslint-disable-next-line no-nested-ternary */}
-          {playingVsAI ? playingVsAI === 1 ? 'Easy AI' : playingVsAI === 2 ? 'Medium AI' : 'Hard AI' : playerO}
+          {playerO}
         </PlayerTwoText>
       </Scoreboard>
 
